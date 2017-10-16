@@ -9,9 +9,9 @@ if($response['conexion'] == 'OK'){
     /*Generar un arreglo con la información a enviar*/
     $data['titulo'] = '"'.$_POST['titulo'].'"';
     $data['fecha_inicio'] = '"'.$_POST['start_date'].'"';
-    $data['hora_inicio'] = '"'.$_POST['start_hour'].'"';
+    $data['hora_inicio'] = '"'.$_POST['start_hour'].':00"';/*Add ":00" to fill datetime format*/
     $data['fecha_finalizacion'] = '"'.$_POST['end_date'].'"';
-    $data['hora_finalizacion'] = '"'.$_POST['end_hour'].'"';
+    $data['hora_finalizacion'] = '"'.$_POST['end_hour'].':00"'; /*Add ":00" to fill datetime format*/
     $data['allday'] = $_POST['allDay'];
     $data['fk_usuarios'] = '"'.$_SESSION['username'].'"';
 

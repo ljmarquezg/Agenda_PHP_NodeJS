@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
-    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Neucha" rel="stylesheet">
   </head>
@@ -16,42 +16,22 @@
         <input type="text" id="user" placeholder="Usuario..." />
         <input type="password" id="pass" placeholder="Contraseña..." />
         <button id="login" class="loginButton">Ingresar</button>
-        <div id="message" style="display:none;"></div>
-        <a href="#" id="generarUsuarios" class="btn btn-primary">Inicializar usuarios</a>
-        <div class="color-white">email: demo@mail.com | contraseña: 123456</div>
       </div>
-      
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/app.js"></script>
+    <script src="jquery.js"></script>
     <script>
         var nombreUsuario = $('#user')
         var pass = $('#pass')
         $('.loginButton').on('click', function(event) {
             if (nombreUsuario.val() != "" && pass.val() != "") {
-                $.post('../server/login.php',{username: nombreUsuario.val(), pass: pass.val()}, function(response) {
-                    $('#message').css({ background: "#a40b0bb3" })
-                    showMessage(JSON.stringify(response.acceso + ". " + response.msg));
-                    if (response.acceso == "Usuario Autorizado") {
-                        $('#message').css({ background: "#03930399" })
-                        window.location.href = "./main.html";
+                $.post('/login',{user: nombreUsuario.val(), pass: pass.val()}, function(response) {
+                    if (response == "Validado") {
+                        window.location.href = "http://localhost:3000/main.html"
                     }
-                }, "json")
+                })
             } else {
-                $('#message').css({ background: "#a40b0bb3" })
-                showMessage("Complete todos los campos");//alert("Complete todos los campos")
+                alert("Complete todos los campos")
             }
-        })
-
-        $('#generarUsuarios').on('click', function(event) {
-                $.post('../server/inicialize_users.php',{}, function(response) {
-                    showMessage(JSON.stringify(response.msg));
-                    if (response.resultado == "1") {
-                        $('#message').css({ background: "#03930399" })
-                    }else{
-                        $('#message').css({ background: "#a40b0bb3" })
-                    }
-                }, "json")
         })
     </script>
   </body>

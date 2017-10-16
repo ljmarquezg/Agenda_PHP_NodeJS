@@ -1,11 +1,10 @@
 
-
+validarSession();
 
 class EventsManager {
     constructor() {
         this.obtenerDataInicial()
     }
-
 
     obtenerDataInicial() {
         let url = '../server/getEvents.php'
@@ -36,13 +35,14 @@ class EventsManager {
     }
 
     poblarCalendario(eventos) {
+      var d = new Date();
         $('.calendario').fullCalendar({
             header: {
         		left: 'prev,next today',
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2017-10-01',
+        	defaultDate: d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(),
         	navLinks: true,
         	editable: true,
         	eventLimit: true,
@@ -173,17 +173,18 @@ class EventsManager {
             end_date,
             start_hour,
             end_hour
+
             start_date = start.substr(0,10)
-            if (typeof value === "undefined") {
+            if (end == "Invalid date") {
               end_date = '';
               start_hour = '';
               end_hour = ''
-              }else{
+            }else{
                 end_date = end.substr(0,10)
                 start_hour = start.substr(11,8)
                 end_hour = end.substr(11,8)
-              };    
-        
+            };
+
 
         form_data.append('id', id)
         form_data.append('start_date', start_date)
@@ -217,7 +218,7 @@ class EventsManager {
 
 $(function(){
   initForm();
-  checkUser();
+  //checkUser();
   var e = new EventsManager();
   $('form').submit(function(event){
     event.preventDefault()
@@ -258,9 +259,9 @@ function initForm(){
 
 }
 
-function checkUser(){
+function validarSession(){
   $.ajax({
-    url: '../server/check_user.php',
+    url: '../server/session.php',
     dataType:"json",
     success: function(data){
       if(data.msg ==""){

@@ -9,20 +9,20 @@ $response['msg'] = $con->initConexion('agenda_db');
 if ($response['msg']=='OK') {
   $resultado = $con->consultar(['eventos'],['*'], "WHERE fk_usuarios ='".$_SESSION['username']."'",'');
   /*Crear un arreglo asociativo con los objetos obtenidos*/
-  $fila = $resultado->fetch_assoc(); 
   $i = 0;
 
   /*Recorrer el arreglo de resultados*/
-  while($fila = $resultado->fetch_assoc()){ 
+  while($fila = $resultado->fetch_assoc()){
     $response['eventos'][$i]['id']=$fila['id'];
     $response['eventos'][$i]['title']=$fila['titulo'];
-    
+
+
     if ($fila['allday'] == 0){ /*Verificar si el registro es fullday*/
       $allDay = false;
        /*Si no es full day, agregar hora de inicio al parametro start*/
-      $response['eventos'][$i]['start']=$fila['fecha_inicio'].'T'.$fila['hora_inicio'].':00';
+      $response['eventos'][$i]['start']=$fila['fecha_inicio'].'T'.$fila['hora_inicio'];
       /*Si no es full day, agregar hora de inicio al parametro end*/
-      $response['eventos'][$i]['end']=$fila['fecha_finalizacion'].'T'.$fila['hora_finalizacion'].':00';
+      $response['eventos'][$i]['end']=$fila['fecha_finalizacion'].'T'.$fila['hora_finalizacion'];
     }else{
       $allDay= true;
        /*Si no es full day, no agregar la hora en el parametro start*/
@@ -30,7 +30,9 @@ if ($response['msg']=='OK') {
        /*Si no es full day, el parametro end debe ser vacio*/
       $response['eventos'][$i]['end']="";
     }
-    $response['eventos'][$i]['allDay']=$allDay; 
+
+
+    $response['eventos'][$i]['allDay']=$allDay;
     /*sumar 1 al contador*/
     $i++;
   }

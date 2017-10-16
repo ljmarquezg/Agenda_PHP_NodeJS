@@ -1,5 +1,4 @@
 <?php
-
   session_start();
 
   class ConectorBD
@@ -22,10 +21,10 @@
       }else {
         return "OK";
       }
-     
+
     }
 
-    function checkUser(){
+    function userSession(){
       if (isset($_SESSION['username'])) {
         $response['msg'] = $_SESSION['username'];
       }else{
@@ -63,7 +62,6 @@
     }
 
     function ejecutarQuery($query){
-      
       return $this->conexion->query($query);
     }
 

@@ -8,7 +8,6 @@
   if(isset($_SESSION['username'])){
     $response['acceso'] = "Usuario Autorizado";
   }else{
-  session_start();
     
   if ($response['conexion']=='OK') {
     if($con->verifyUsers() > 0){

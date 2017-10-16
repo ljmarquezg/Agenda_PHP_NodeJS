@@ -1,5 +1,5 @@
 
-    function showMessage(message){
+  function showMessage(message){
         $('#message').html('<p>'+message+'</p>').show('blind').delay(5000)
 
     }
@@ -9,11 +9,24 @@ $(function(){
   $('#generarUsuarios').on('click', function(e){
     l.generarUsuarios();
   })
-  if(checkUser() != ""){
-    window.location.href = "./main.html"
-  }
-})
+   validarSession();
+ })
 
+function validarSession(){
+  $.ajax({
+    url: '../server/session.php',
+    dataType:"json",
+    success: function(data){
+      if(data.msg !=""){
+        alert("Ya existe una sesión iniciada. Redireccionando")
+        window.location.href = './main.html'
+      }
+    },
+    error: function(data){
+      //window.location.href = './index.html'
+    }
+  })
+  }
 
 class Login {
   constructor() {
@@ -80,21 +93,4 @@ class Login {
       }
     })
   }
-}
-
-function checkUser(){
-  $.ajax({
-    url: '../server/check_user.php',
-    dataType:"json",
-    success: function(data){
-      if(data.msg ==""){
-        window.location.href = './index.html'
-      }else{
-        $("#logout").html('Cerrar Sesión '+data.msg)
-      }
-    },
-    error: function(data){
-      //window.location.href = './index.html'
-    }
-  })
 }

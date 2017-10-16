@@ -134,7 +134,7 @@ input {
 
 .radio-input {
   border: solid white 1px;
-  background: url(../img/blue.png) no-repeat;
+  background: url(blue.png) no-repeat;
   -webkit-appearance:none;
   width: 20px;
   background-position: -2px -1px;
