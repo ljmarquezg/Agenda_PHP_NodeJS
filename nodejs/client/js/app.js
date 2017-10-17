@@ -1,4 +1,5 @@
 
+
 class EventManager {
     constructor() {
         this.urlBase = "/events"

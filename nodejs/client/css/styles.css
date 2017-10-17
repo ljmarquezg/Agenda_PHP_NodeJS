@@ -6,7 +6,7 @@
 html {
   height: 100%;
   width: 100%;
-  background: url('back.jpeg');
+  background: url('../img/back.jpeg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -42,7 +42,7 @@ body {
   justify-content: center;
 }
 
-input {
+input, #message {
   width: 350px;
   height: 25px;
   padding: 5px;
@@ -68,4 +68,9 @@ input {
   background: #1270b6;
   font-family: 'Kaushan Script', cursive;
   font-family: 'Neucha', cursive;
+}
+
+#message{
+  height: auto;
+  text-align: center;
 }

@@ -1,0 +1,21 @@
+[
+	{
+		"email": "demo@mail.com",
+		"nombre": "User Demo",
+		"password": "123456",
+		"fecha_nacimiento": "1998-09-08",
+	},
+	{
+		"email": "juan@mail.com",
+		"nombre": "Juan Gómez",
+		"password": "123456",
+		"fecha_nacimiento": "1992-12-15",
+
+	},
+	{
+    "email": "carla@mail.com",
+		"nombre": "Carla Martinez",
+		"password": "123456",
+		"fecha_nacimiento": "1992-04-17",
+	}
+]
