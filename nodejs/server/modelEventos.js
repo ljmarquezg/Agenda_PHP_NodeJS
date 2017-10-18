@@ -1,15 +1,11 @@
-const mongoose = require('mongoose')
+let mongoose = require('mongoose')
 
-const Schema = mongoose.Schema
+let Schema = mongoose.Schema
 
 let EventSchema = new Schema({
-  id: { type: Number, required: true, index: {unique: true}},
-  start_date: { type: String, required: true },
-  start_hour: { type: String, required: false},
-  end_date: { type: String, required: false },
-  end_hour: {type: String, required: false},
-  allday: {type: Boolean, required:false},
-  fk_usuarios: { type: Schema.ObjectId, ref: 'Usuarios' }
+  title:{ type: String, required: true },
+  start: { type: String, required: true },
+  end: { type: String, required: false },
   })
 
 let EventoModel = mongoose.model('Evento', EventSchema)

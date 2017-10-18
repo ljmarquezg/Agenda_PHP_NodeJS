@@ -24,16 +24,16 @@ module.exports.consultarLogin = function(callback) {
     })
 }
 
-module.exports.insertarRegistro = function(callback) {
-    let Mateo = new Usuario({ nombre: "Mateo", edad: 28, peso: 90 })
-    Mateo.save((error) => {
+module.exports.insertarEvento = function(callback) {
+    let evento = new Evento({ id: "Mateo", edad: 28, peso: 90 })
+    evento.save((error) => {
         if (error) callback(error)
         callback(null, "Registro guardado")
     })
 }
 
 module.exports.eliminarRegistro = function(callback) {
-    Usuario.remove({ email:'demomail@mail.com' }, (error) => {
+    Evento.remove({ email:'demomail@mail.com' }, (error) => {
         if (error) callback(error)
         callback(null, "Se elimino el registro correctamente");
     })

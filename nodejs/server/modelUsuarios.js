@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+let mongoose = require('mongoose')
 
-const Schema = mongoose.Schema
+let Schema = mongoose.Schema
 
 let UserSchema = new Schema({
   user: { type: String, required: true, unique: true},

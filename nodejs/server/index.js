@@ -1,8 +1,8 @@
 //db.agenda.usuarios.insert({email:'demo@mail.com', password:'123456', nombre:'Usuario Demo', fecha_nacimiento:'1988-09-08'})
-
 const http = require('http'),
       path = require('path'),
       Routing = require('./rutas.js'),
+      RoutingEvents = require('./rutasEventos.js'),
       express = require('express'),
       bodyParser = require('body-parser'),
       MongoClient = require('mongodb').MongoClient
@@ -19,6 +19,7 @@ app.use(express.static('../client'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 app.use('/usuarios', Routing)
+app.use('/events', RoutingEvents)
 
 Server.listen(PORT, function() {
   console.log('Server is listeng on port: ' + PORT)

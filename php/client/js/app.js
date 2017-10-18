@@ -126,7 +126,6 @@ class EventsManager {
       }else{
         alert('Título y fecha de inicio no pueden ser vacios')
       }
-
     }
 
     validarForm(){
