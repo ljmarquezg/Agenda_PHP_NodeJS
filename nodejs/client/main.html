@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Neucha" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/loader.css">
   </head>
   <body>
     <div class="headerCalendar">Mi Agenda Personal</div>
@@ -18,6 +19,11 @@
       <div class="calendarDataContainer">
         <div class="mainCalendarContainer">
           <div class="calendarContainer">
+            <div class="loader-container">
+             <div class="loader" style="display:block">
+             </div>
+             <h3>Cargando</h3>
+           </div>
             <div class="calendario"></div>
           </div>
         </div>
@@ -51,10 +57,14 @@
     </div>
     <script src="js/jquery.js"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="js/fullcalendar.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <!--script src="js/bundle.js"></script-->
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript">
+      $('.loader-container').fadeOut('slow')
+    </script>
     <!--script src="js/bundle.js"></script-->
   </body>
 </html>

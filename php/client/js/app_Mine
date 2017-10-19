@@ -19,7 +19,7 @@ class EventsManager {
             if (data.msg=="OK") {
               if(data.getData == "OK"){
                 this.poblarCalendario(data.eventos)
-                return data.eventos
+                alert('actualizados')
               }else{
                 alert("Hubo un error al obtener los eventos.")
               }
@@ -79,6 +79,7 @@ class EventsManager {
         form_data.append('titulo', $('#titulo').val())
         form_data.append('start_date', $('#start_date').val())
         form_data.append('allDay', document.getElementById('allDay').checked)
+        form_data.append('completado', false)
         if (!document.getElementById('allDay').checked) {
           form_data.append('end_date', $('#end_date').val())
           form_data.append('end_hour', $('#end_hour').val())
@@ -100,21 +101,20 @@ class EventsManager {
             if (data.msg=="OK") {
               if (document.getElementById('allDay').checked) {
                 $('.calendario').fullCalendar('renderEvent', {
-                  id:data.id,
                   title: $('#titulo').val(),
                   start: $('#start_date').val(),
                   allDay: true
                 })
               }else {
                 $('.calendario').fullCalendar('renderEvent', {
-                  id:data.id,
                   title: $('#titulo').val(),
-                  start: $('#start_date').val()+"T"+$('#start_hour').val(),
+                  start: $('#start_date').val()+" "+$('#start_hour').val(),
                   allDay: false,
-                  end: $('#end_date').val()+"T"+$('#end_hour').val()
+                  end: $('#end_date').val()+" "+$('#end_hour').val()
                 })
               }
-              alert('Se ha añadido el evento exitosamente '+ data.id)
+              $('calendario').fullCalendar('renderEvents')
+              alert('Se ha añadido el evento exitosamente')
             }else {
               alert(data.msg)
             }
@@ -126,7 +126,9 @@ class EventsManager {
       }else{
         alert('Título y fecha de inicio no pueden ser vacios')
       }
+      this.obtenerDataInicial()
     }
+
     validarForm(){
       if($('#titulo').val() != "" &&  $('#start_date').val() != ""){
         return true;
@@ -148,7 +150,7 @@ class EventsManager {
         type: 'POST',
         success: (data) =>{
           if (data.msg=="OK") {
-            $('.calendario').fullCalendar('removeEvents', event.id);
+            $('.calendario').fullCalendar('removeEvents', event._id);
             alert('Se ha eliminado el evento exitosamente')
           }else {
             alert(data.msg)
@@ -172,7 +174,7 @@ class EventsManager {
             start_hour,
             end_hour
             start_date = start.substr(0,10)
-            if (end == "Invalid date") { //Verificar si el evento es nulo y de vuelve invalid date
+            if (end == "Invalid date") {
               end_date = '';
               start_hour = '';
               end_hour = ''
@@ -181,6 +183,7 @@ class EventsManager {
                 start_hour = start.substr(11,8)
                 end_hour = end.substr(11,8)
             };
+
 
         form_data.append('id', id)
         form_data.append('start_date', start_date)
@@ -214,6 +217,7 @@ class EventsManager {
 
 $(function(){
   initForm();
+  //checkUser();
   var e = new EventsManager();
   $('form').submit(function(event){
     event.preventDefault()
@@ -258,7 +262,6 @@ function validarSession(){
   $.ajax({
     url: '../server/session.php',
     dataType:"json",
-    type:'post',
     success: function(data){
       if(data.msg ==""){
         window.location.href = './index.html'
@@ -275,7 +278,6 @@ function validarSession(){
 function logout(){
   $.ajax({
     url:'../server/logout.php',
-    type: 'post',
     dataType: 'json',
     success: function(data){
       window.location.href = './index.html'

@@ -1,14 +1,13 @@
 <?php
-  
-  require('./conector.php');
-  $con = new ConectorBD('localhost','user_agenda','123456');
 
-  $response['conexion'] = $con->initConexion('agenda_db');
+  require('./conector.php');
+  $con = new ConectorBD();
+  $response['conexion'] = $con->initConexion($con->database);
 
   if(isset($_SESSION['username'])){
     $response['acceso'] = "Usuario Autorizado";
   }else{
-    
+
   if ($response['conexion']=='OK') {
     if($con->verifyUsers() > 0){
 

@@ -3,25 +3,55 @@
 
   class ConectorBD
   {
-    private $host;
-    private $user;
-    private $password;
+    private $host = 'localhost'; //Nombre del servidor
+    private $user = 'user_agenda'; //Nombre de usuario con permisos restringidos
+    private $password = '123456'; //Conrtaseña de usuairo con permisos restringidos
+    private $root = 'root'; //Nobre de usuario con permisos administrativos
+    private $rootpw = '';//Contraseña de usuario con permisos administrativos
+    public $database = 'agenda_db2'; //Nombre de base de datos
     private $conexion;
 
-    function __construct($host, $user, $password){
-      $this->host = $host;
-      $this->user = $user;
-      $this->password = $password;
-    }
+    function verifyConexion(){
+      @$this->conexion = new mysqli($this->host, $this->user, $this->password);
+        if( ! $this->conexion ){
+          $conexion['msg'] = "<h3>Error al conectarse a la base de datos.</h3>";
+        }
+        if( $this->conexion->connect_errno ){
+          $response=  "<h6>Error al conectarse a la base de datos.</h6> ";
+          if ($this->conexion->connect_errno == "2002" ){
+              $response.="<p>Vefirique que el <b style='font-size:1em'>nombre del servidor</b> corresponda al parámetro localhost en el archivo <b>conector.php</b> dentro de la <b>carpeta server</b> del proyecto</p>";
+              $conexion['msg'].="<p class='small'>Vefirique que el <b style='font-size:1em'>nombre del servidor</b> corresponda al parámetro localhost en el archivo <b>conector.php</b> dentro de la <b>carpeta server</b> del proyecto</p>";
+          }
+          if ($this->conexion->connect_errno == "1045" ){
+            $response.="<p>Vefirique que los parámetros de conexion <b>username y password </b> del archivo <b>conector.php</b> dentro de la <b>carpeta server</b> del proyecto correspondan a un <b>usuario y contraseña válido de phpmyadmin</b></br>". $this->conexion->connect_error . "\n</p>";
+            $conexion['msg'].="<p>Vefirique que el <b style='font-size:1em'>nombre del servidor</b> corresponda al parámetro localhost en el archivo <b>conector.php</b> dentro de la <b>carpeta server</b> del proyecto</p>";
+          }
+        }else{
+          /*Si los parametros de conexion a phpMyadmin son correctos continuar*/
+          $conexion['phpmyadmin'] =  "OK";
+          $conexion['msg'] =  "<p>Conexion establecida con phpMyadmin</p>";
+          /*Verificar que existe la base de datos agenda_db en phpmyadmin*/
+          if($this->initConexion($this->database) == '1049'){//Si no existe la base de datos
+            $database = $this->newDatabase();
+            if ($database != "OK"){
+              $conexion['msg'] .= "Ha ocurrido un error al crear la base de datos. Por favor verifique que la base de datos existe. Si desea crear automaticamente la base de datos, ingrese los parámetros de un usuario phpmyadmin con permisos para crear bases de datos en el archivo <b>conector.php</b> en la carpeta <b>server</b> del proyecto. ";
+            }else{
+              $conexion['msg'] .= "Base de datos encontrada";
+            }
+              //$conexion['msg'] .= "No se encontró la base de datos <b>".$this->database.'</b>.</br>Verifique que existe o <a href="#" id="creardb" style="color:white; text-decoration:underline">Presione para Crear</a>';
+          }
+        }
+        echo json_encode($conexion);
+     }
+
 
     function initConexion($nombre_db){
-      $this->conexion = new mysqli($this->host, $this->user, $this->password, $nombre_db);
+    @$this->conexion = new mysqli($this->host, $this->user, $this->password, $nombre_db);
       if ($this->conexion->connect_error) {
-        return "Error:" .$this->conexion->connect_error;
+        return $this->conexion->connect_errno;
       }else {
         return "OK";
       }
-
     }
 
     function userSession(){
@@ -44,8 +74,21 @@
     function getConexion(){
       return $this->conexion;
     }
+
+    function newDatabase(){
+        $this->conexion = new mysqli($this->host, $this->root, $this->rootpw);
+        $query = $this->conexion->query('CREATE DATABASE IF NOT EXISTS '.$this->database);
+        if($query == 1)
+        {
+          return "OK"; //Devolver respuesta positiva correcta
+        }
+        else{
+         return $query->connect_errno; //Devolver error;
+      }
+    }
+
     function newTable($nombre_tbl, $campos){
-      $sql = 'CREATE TABLE '.$nombre_tbl.' (';
+      $sql = 'CREATE TABLE IF NOT EXISTS'.$nombre_tbl.' (';
       $length_array = count($campos);
       $i = 1;
       foreach ($campos as $key => $value) {
@@ -57,7 +100,6 @@
         }
         $i++;
       }
-
       return $this->ejecutarQuery($sql);
     }
 
@@ -145,26 +187,6 @@
       }else {
         $sql .= $condicion.";";
       }
-      return $this->ejecutarQuery($sql);
-    }
-
-    function getViajesUser($user_id){
-      $sql = "SELECT co.nombre AS ciudad_origen, cd.nombre AS ciudad_destino, v.placa AS placa, v.fabricante AS fabricante, v.referencia AS referencia, a.fecha_salida AS fecha_salida, a.fecha_llegada AS fecha_llegada, a.hora_salida AS hora_salida, a.hora_llegada AS hora_llegada
-              FROM viajes AS a
-              JOIN ciudades AS co ON co.id = a.fk_ciudad_origen
-              JOIN ciudades AS cd ON cd.id = a.fk_ciudad_destino
-              JOIN vehiculos AS v ON v.placa = a.fk_vehiculo
-              WHERE a.fk_conductor = ".$user_id.";";
-      return $this->ejecutarQuery($sql);
-    }
-
-    function getCiudades(){
-      $sql = "SELECT id, nombre FROM ciudades";
-      return $this->ejecutarQuery($sql);
-    }
-
-    function getVehiculo(){
-      $sql = "SELECT placa, fabricante, referencia FROM vehiculos";
       return $this->ejecutarQuery($sql);
     }
 

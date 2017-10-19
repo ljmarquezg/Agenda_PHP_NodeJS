@@ -2,7 +2,7 @@
 /*requerir el archivo conector.php*/
 require('./conector.php');
 /*enviar los parámertos de conexión mysqli*/
-$con = new ConectorBD('localhost','t_general','123456');
+$con = new ConectorBD();
 /*Conectarse a la base de datos agenda_db*/
 $response['msg'] = $con->initConexion('agenda_db');
 
@@ -15,8 +15,6 @@ if ($response['msg']=='OK') {
   while($fila = $resultado->fetch_assoc()){
     $response['eventos'][$i]['id']=$fila['id'];
     $response['eventos'][$i]['title']=$fila['titulo'];
-
-
     if ($fila['allday'] == 0){ /*Verificar si el registro es fullday*/
       $allDay = false;
        /*Si no es full day, agregar hora de inicio al parametro start*/

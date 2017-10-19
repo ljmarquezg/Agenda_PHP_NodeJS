@@ -7,6 +7,11 @@ $con = new ConectorBD();
 $response['conexion'] = $con->initConexion('agenda_db');
 if($response['conexion'] == 'OK'){
     /*Generar un arreglo con la información a enviar*/
+    $resultado = $con->getNewEventID();
+    while($fila = $resultado->fetch_assoc()){
+      $response['id']=$fila['MAX(id)'];
+    }
+    //$data['id'] = $con->getNewEventID();
     $data['titulo'] = '"'.$_POST['titulo'].'"';
     $data['fecha_inicio'] = '"'.$_POST['start_date'].'"';
     $data['hora_inicio'] = '"'.$_POST['start_hour'].':00"';/*Add ":00" to fill datetime format*/
@@ -18,10 +23,6 @@ if($response['conexion'] == 'OK'){
     /*Enviar los parámetros de inserción de información a la tabla eventos*/
     if($con->insertData('eventos', $data)){
         /*Mostrar mensaje success*/
-        $resultado = $con->consultar(['eventos'],['MAX(id)']); //Obtener el id registrado perteneciente al nuevo registro
-        while($fila = $resultado->fetch_assoc()){
-          $response['id']=$fila['MAX(id)']; //Enviar ultimo Id como parámetro para el calendario
-        }
         $response['msg'] = 'OK';
     }else{
         /*Mostrar mensaje de error*/
