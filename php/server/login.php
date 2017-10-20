@@ -4,7 +4,7 @@
 
   $con = new ConectorBD();
 
-  $response['conexion'] = $con->initConexion('agenda_db');
+  $response['conexion'] = $con->initConexion($con->database);
 
   if ($response['conexion']=='OK') {
     if($con->verifyUsers() > 0){
@@ -20,7 +20,7 @@
         $response['msg'] = 'Redireccionando';
         $response['acceso'] = 'Usuario Autorizado';
         session_start();
-        $_SESSION['username']=$fila['email'];
+        $_SESSION['email']=$fila['email'];
       }else {
         $response['msg'] = 'Contraseña incorrecta';
         $response['acceso'] = 'Acceso rechazado';

@@ -5,7 +5,6 @@ class EventsManager {
     constructor() {
         this.obtenerDataInicial()
     }
-
     obtenerDataInicial() {
         let url = '../server/getEvents.php'
         $.ajax({

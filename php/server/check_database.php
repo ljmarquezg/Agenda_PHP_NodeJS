@@ -1,16 +1,9 @@
-<?php /*requerir el archivo conector.php*/
+<?php
+/*requerir el archivo conector.php*/
 require('./conector.php');
-/*enviar los parámertos de conexión mysqli*/
-$con = new ConectorBD();
-/*Conectarse a la base de datos agenda_db*/
+$con = new ConectorBD(); //Iniciar el objeto ConectorBD
+$response['msg'] = $con->verifyConexion();//Iniciar la función verifyConexion
+return $response['msg']; //Devolver resultado
 
-$response['msg'] = $con->verifyConexion();
-//$response['msg'] = $con->initConexion('agenda_db');
-
-if ($response['msg']=='OK') {
-  return $response['msg'];
-}else{
-  return $response['msg'];
-}
 
 ?>

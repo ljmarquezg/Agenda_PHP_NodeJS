@@ -3,7 +3,7 @@ require('./conector.php');
 /*enviar los parámertos de conexión mysqli*/
 $con = new ConectorBD();
 /*Conectarse a la base de datos agenda_db*/
-$response['conexion'] = $con->initConexion('agenda_db');
+$response['conexion'] = $con->initConexion($con->database);
 if($response['conexion'] == 'OK'){
 			$data['id'] = '"'.$_POST['id'].'"';
 	    $data['fecha_inicio'] = '"'.$_POST['start_date'].'"';

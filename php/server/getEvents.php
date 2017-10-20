@@ -4,10 +4,10 @@ require('./conector.php');
 /*enviar los parámertos de conexión mysqli*/
 $con = new ConectorBD();
 /*Conectarse a la base de datos agenda_db*/
-$response['msg'] = $con->initConexion('agenda_db');
+$response['msg'] = $con->initConexion($con->database);
 
 if ($response['msg']=='OK') {
-  $resultado = $con->consultar(['eventos'],['*'], "WHERE fk_usuarios ='".$_SESSION['username']."'",'');
+  $resultado = $con->consultar(['eventos'],['*'], "WHERE fk_usuarios ='".$_SESSION['email']."'",'');
   /*Crear un arreglo asociativo con los objetos obtenidos*/
   $i = 0;
 

@@ -1,19 +1,8 @@
 verificarConexion()
 
-function showMessage(message){
+function showMessage(message){ //Mensajes de error
   $('#message').html('<p>'+message+'</p>').fadeIn('slow').delay(5000)
-}
-
-function creardb(){
-  $('.loader-container h3').text('Verificando conexion a base de datos');
-  $.ajax({
-    url:'../server/crearDB.php',
-    data:{},
-    dataType:'json',
-    success: function(data){
-      alert(data)
-    }
-  })
+  $('.overlay').fadeOut('slow')
 }
 
 function verificarConexion(){
@@ -21,24 +10,64 @@ function verificarConexion(){
     url:'../server/check_database.php',
     dataType: 'json',
     success:function(data){
-      $('.overlay').fadeOut('slow')
-      $("#message").html(data.msg).fadeIn('slow')
       if(data.phpmyadmin != "OK"){
         $('.row.align-center').fadeOut('fast')
+        showMessage(data.msg) //Mostrar Mensaje de error
+      }else{
+        crearDB() //Funcion para crear base de datos
       }
-      creardb()
-    },
+      },
     error:function(data){
-      $("#message").html(data).fadeIn('slow')
-      $('.row.align-center').fadeOut('fast')
-      $('.overlay').fadeOut('slow')
+      showMessage(data) //Mostrar Mensaje de error
     }
   })
 }
 
+function crearDB(){
+  self = $('.loader-container h3');
+  self.text('Verificando conexion a base de datos');
+  $.ajax({
+    url:'../server/crearDB.php',
+    data:{},
+    dataType: 'json',
+    success: function(data){
+      if(data.database == "OK"){
+        $('.loader-container h3').html(data.msg)
+        crearTabla() //Crear tablas
+      }else{
+        $('.row.align-center').fadeOut('fast')
+        showMessage(data.msg); //Mostrar mensaje de error
+      }
+    },
+    error: function(data){
+      $('.row.align-center').fadeOut('fast')
+      showMessage(data.msg) //Mostrar mensaje de console.error();
+    }
+  })
+}
 
-
-
+function crearTabla(){
+  self = $('.loader-container h3')
+  self.text('Verificando Tablas');
+  $.ajax({
+    url:'../server/check_tablas.php',
+    dataType:'json',
+    success: function(data){
+      $('.overlay').delay(1500).fadeOut('slow')
+      if(data.msg =="OK"){
+        var l = new Login();
+        l.generarUsuarios() //Agregar usuarios a la base de datos
+        self.html('<p>Sistema inicializado</p>')
+      }else{
+        $('.row.align-center').fadeOut('fast')
+        showMessage(data.detalle).fadeIn()
+      }
+    },
+    error:function(data){
+      $('#message').text((JSON.stringify(data.responseText)));
+    }
+  })
+}
 
 $(function(){
   var l = new Login();
@@ -61,6 +90,7 @@ function validarSession(){
       }
     },
     error: function(data){
+      $('.row.align-center').fadeOut('fast')
       //window.location.href = './index.html'
     }
   })
@@ -92,7 +122,7 @@ class Login {
       type: 'POST',
       success: function(php_response){
         if (php_response.conexion == "OK") {
-          $('#message').css({ background: "#a40b0bb3" })
+          $('#message').css({ background: "#03930399" })
           showMessage(JSON.stringify(php_response.acceso + ". " + php_response.msg));
           if (php_response.acceso == "Usuario Autorizado") {
             $('#message').css({ background: "#03930399" })
@@ -118,6 +148,7 @@ class Login {
       success: function(php_response){
         if (php_response.conexion == "OK") {
           showMessage(JSON.stringify(php_response.msg));
+          $('.row.align-center').fadeIn('fast')
           if (php_response.resultado == "1") {
             $('#message').css({ background: "#03930399" })
           }else{

@@ -4,7 +4,7 @@ require('./conector.php');
 /*enviar los parámertos de conexión mysqli*/
 $con = new ConectorBD();
 /*Conectarse a la base de datos agenda_db*/
-$response['conexion'] = $con->initConexion('agenda_db');
+$response['conexion'] = $con->initConexion($con->database);
 if($response['conexion'] == 'OK'){
     /*Generar un arreglo con la información a enviar*/
     if($con->eliminarRegistro('eventos', 'id='.$_POST['id'])){

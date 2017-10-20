@@ -38,7 +38,7 @@
 
     $insert->execute();
     $response['resultado']="1";
-    $response['msg']="Usuarios generados correctamente. Para iniciar sesion:</br>email: demo@mail.com</br>contraseña: 123456";
+    $response['msg']= 'Para iniciar sesion:</br>email: demo@mail.com</br>contraseña: 123456';
     $con->cerrarConexion();
   }else{
     $response['resultado']="0";
