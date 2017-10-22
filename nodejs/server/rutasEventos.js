@@ -14,6 +14,12 @@ RouterEventos.get('/all', function(req, res) {
   })
 })
 
+RouterEventos.get('/reiniciar', function(req, res) {
+  Evento.drop(function(err, resp){
+    res.send(resp)
+  })
+})
+
 RouterEventos.all('/', function(req, res) {
   res.send('Mostrar main.html')
   res.end()
@@ -21,23 +27,36 @@ RouterEventos.all('/', function(req, res) {
 
 // Agregar a un usuario
 RouterEventos.post('/new', function(req, res) {
-    let
-        title = req.body.title,
+  var newID = Evento.nextCount(function(err, count) {
+    var evento = new Evento();
+    evento.save(function(err) {
+      if(count == 0){
+        count = 1
+      }
+
+        evento.nextCount(function(err, count) {
+            newID = (count-1)
+            console.log(newID)
+          });
+      });
+  });
+
+
+    let title = req.body.title,
         start = req.body.start,
-        end = req.body.end
+        end   = req.body.end
 
     let evento = new Evento({
       title: title,
       start: start,
       end: end,
-      //fk_usuarios: 'demo'//{ type: Schema.ObjectId, ref: 'Usuarios' }
     })
     evento.save(function(error) {
         if (error) {
             res.status(500)
             res.json(error)
         }
-        res.send("Evento guardado")
+        res.json(newID)
     })
 })
 

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información importante</title>
+  <link rel="stylesheet" href="client/css/styles.css"/>
+  <link rel="stylesheet" href="dist/css/materialize.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Neucha" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<style media="screen">
+  body{
+    overflow: auto;
+  }
+  .card-content ol li{
+    margin-bottom:10px
+  }
+  a{
+    margin-left: 5px;
+    margin-right: 5px;  
+  }
+</style>
+
+
+  <div class="container">
+
+
+    <ul class="collapsible blue-grey lighten-5" data-collapsible="accordion">
+      <h5 class="center-align">
+        Antes de comenzar:
+      </h5>
+
+      <li>
+        <div class="collapsible-header active">1. Iniciar el servidor Mongodb <i class="material-icons">arrow_drop_down</i></div>
+        <div class="collapsible-body blue-grey lighten-4" style="display: block;">
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">cloud_download</i> 1.1 Descargar mongodb - Presione<a target"_blank" href="https://www.mongodb.com/download-center?jmp=nav#community"> aqui </a> para ir a la página de descargas<i class="material-icons">arrow_drop_down</i></div>
+              <div class="collapsible-body blue-grey lighten-5">
+                <a class='dropdown-button btn waves' href='#' data-activates='dropdown1'>Seleccione sistema operativo</a>
+                <ul id='dropdown1' class='dropdown-content'>
+                  <li><a  target="_blank" href="https://docs.mongodb.com/manual/administration/install-on-linux/">Linux</a></li>
+                  <li><a  target="_blank" href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">Mac OS X</a></li>
+                  <li><a target="_blank"  href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">Windows</a></li>
+                </ul>
+                <p>
+                  Se recomienda realizar la instalación en la ruta por defecto.
+                </p>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">settings</i>1.2 Instalar mongodb <i class="material-icons">arrow_drop_down</i></div>
+              <div class="collapsible-body blue-grey lighten-5">
+                <span>
+                  <ol>
+                    <ol>
+                      <li type="i"><p>Ejecutar el archivo de instalación descargado en el paso anterior</p></li>
+                      <li type="i"><p>Antes de iniciar el programa por primera vez, crear el directorio de bases de datos: <i>data/db</i> en la raiz del disco duro</p></li>
+                      <p>Se recomienda <a target="_blank" href="https://docs.mongodb.com/manual/administration/install-community/">leer la documentación de la instalación </a> </p>
+                    </ol>
+                  </ol>
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header"><i class="material-icons">play_arrow</i>1.3 Iniciar el servicio mongodb <i class="material-icons">arrow_drop_down</i></div>
+              <div class="collapsible-body blue-grey lighten-5">
+                <span>
+                  <ol>
+                    <li type="i"><p>Ir a la carpeta de instalación mongodb y ejecutar el archivo <i>mongo.exe</i> que se encurntra dentro de la carpeta bin</p></li>
+                    <li type="i"><p>Una vez iniciado el servidor, iniciar el servicio cliente ejecuntando el archivo <i>mongod.exe</i> dentro de esta carpeta</p></li>
+                  </ol>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="collapsible-header">2. Iniciar NodeJS <i class="material-icons">arrow_drop_down</i></div>
+        <div class="collapsible-body blue-grey lighten-5">
+          <span>
+            <ul class="collapsible" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header"><i class="material-icons">code</i>Abrir la consola del sistema y dirigirse al directorio donde se encuentra el proyecto <i class="material-icons">arrow_drop_down</i></div>
+                <div class="collapsible-body blue-grey lighten-5">
+                  <span>
+                      <div class="col s12 m7">
+                          <div class="card horizontal">
+                            <div class="card-image">
+                              <a class="waves-effect waves-light modal-trigger" href="#modal1"><img src="dist/img/nodeindex.png"></a>
+                              <!-- Modal Structure -->
+                              <div id="modal1" class="modal">
+                                <div class="modal-content">
+                                  <img src="dist/img/nodeindex.png">
+                                </div>
+                                <div class="modal-footer">
+                                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="card-stacked">
+                              <div class="card-content">
+                                <ol>
+                                  <li type="i"><p>En la consola navegar hasta la carpeta que contiene el proyecto. Para este ejemplo la carpeta se encuentra en <i>C:\nodejs</i></br></p></li>
+                                  <li type="i"><p>Navegar hasta la carpeta <i>server</i> contenida dentro de la carpeta raiz del proyecto</br></p></li>
+                                  <li type="i"><p>Ejecutar el comando index.js para iniciar el proyecto</br></p></li>
+                                  <li type="i"><p>Si el sistema se inicia correctamente la cónsola debe mostrar el mensaje <i>"Servidor iniciado en puerto: 3000"</i></br></p></li>
+                                </ol>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  </span>
+                </div>
+              </li>
+
+              <li>
+                <div class="collapsible-header"><i class="material-icons">web</i> 2.2 Iniciar la aplicación desde el navegador <i class="material-icons">arrow_drop_down</i></div>
+                <div class="collapsible-body blue-grey lighten-5">
+                  <p>Si la configuración se ha realizado correctamente, el navedador abrirá una nueva pestaña con la página principal del proyecto al hacer clic en <a target="_blank" href="http://localhost:3000">Abrir Proyecto</a>.</p>
+                  <p><i>Examine el archivo index.js ubicado en la carpeta server del proyecto si desea cambiar el puerto o el nombre del servidor.</i></p>
+                </div>
+              </li>
+
+            </ul>
+          </span>
+        </div>
+      </li>
+    </ul>
+
+
+
+  </div>
+<script type="text/javascript" src="client/js/jquery.js"></script>
+<script type="text/javascript" src="dist/js/materialize.min.js"></script>
+<script>$('.modal').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .5, // Opacity of modal background
+    inDuration: 300, // Transition in duration
+    outDuration: 200, // Transition out duration
+    startingTop: '4%', // Starting top style attribute
+    endingTop: '10%', // Ending top style attribute
+  }
+);
+</script>
+</div>
+</body>
+</html>

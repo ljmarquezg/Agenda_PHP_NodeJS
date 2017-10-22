@@ -25,7 +25,8 @@ class EventManager {
     guardarEvento() {
         $('.addButton').on('click', (ev) => {
             ev.preventDefault()
-            let nombre = $('#titulo').val(),
+            let
+            nombre = $('#titulo').val(),
             start = $('#start_date').val(),
             title = $('#titulo').val(),
             end = '',
@@ -47,9 +48,18 @@ class EventManager {
                     end: end
                 }
                 $.post(url, ev, (response) => {
-                    alert(response)
+                  var newEvent = {
+                      _id:response,
+                      title: title,
+                      start: start,
+                      end: end
+                  }
+
+                  $('.calendario').fullCalendar('renderEvent', newEvent)
+                  alert("Evento guardado. _id:"+ newEvent['_id'])
+
                 })
-                $('.calendario').fullCalendar('renderEvent', ev)
+
             } else {
                 alert("Complete los campos obligatorios para el evento")
             }

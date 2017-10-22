@@ -1,7 +1,4 @@
 <?php
-
-  //ALTER TABLE `eventos` ADD CONSTRAINT `fk_eventos_usuario` FOREIGN KEY (`fk_usuarios`) REFERENCES `agenda_db`.`usuarios`(`email`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
   require('./conector.php');
 
   $con = new ConectorBD();
@@ -38,7 +35,7 @@
 
     $insert->execute();
     $response['resultado']="1";
-    $response['msg']= 'Para iniciar sesion:</br>email: demo@mail.com</br>contraseña: 123456';
+    $response['msg']= 'Información de inicio de sesion:</br>email: demo@mail.com | juan@mail.com | carla@mail.com </br>contraseña: 123456';
     $con->cerrarConexion();
   }else{
     $response['resultado']="0";
