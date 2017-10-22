@@ -1,13 +1,12 @@
-let mongoose = require('mongoose')
+let mongoose = require('mongoose'), //Requerir el módulo mongoose
+    Schema = mongoose.Schema //Definir la variable Schema
 
-let Schema = mongoose.Schema
-
-let UserSchema = new Schema({
-  user: { type: String, required: true, unique: true},
-  email: { type: String, required: true },
-  password: { type: String, required: true},
+let UserSchema = new Schema({ //Cerar el esquema de los usuarios
+  user: { type: String, required: true, unique: true}, //variable usuario - Obligatoria
+  email: { type: String, required: true }, //variable email - Obligatoria
+  password: { type: String, required: true}, //variable contraseña - Obligatoria
   })
 
-let UsuarioModel = mongoose.model('Usuario', UserSchema)
+let UsuarioModel = mongoose.model('Usuario', UserSchema) //Definir el modelo del usuario
 
-module.exports = UsuarioModel
+module.exports = UsuarioModel //Exportar el modelo del usuario

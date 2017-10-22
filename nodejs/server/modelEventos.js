@@ -1,16 +1,16 @@
-let mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    autoIncrement = require('mongoose-auto-increment'),
+let mongoose = require('mongoose'), //Requerir el módulo mongoose
+    Schema = mongoose.Schema, //Definir la variable Schema
+    autoIncrement = require('mongoose-auto-increment'), //Requerir módulo para autoincrementar valor del Id.
 
-  EventSchema = new Schema({
-  title:{ type: String, required: true },
-  start: { type: String, required: true },
-  end: { type: String, required: false },
-  })
+    EventSchema = new Schema({ //Cerar el esquema de los Eventos
+      title:{ type: String, required: true }, //Definir titulo del evento - Obligatorio
+      start: { type: String, required: true }, //Inicio del evento - Obligatorio
+      end: { type: String, required: false }, //Finalizacion del evento - No obligatorio
+    });
 
-  autoIncrement.initialize(connection)
-  EventSchema.plugin(autoIncrement.plugin, 'Evento');
+autoIncrement.initialize(connection) //Inicializar el módulo de autoincrementar en la variable conexión
+EventSchema.plugin(autoIncrement.plugin, {model: 'Evento', startAt: 1} ); //Asignar el plugin de autoincrementar al esquema Evento
 
-let EventoModel = mongoose.model('Evento', EventSchema)
+let EventoModel = mongoose.model('Evento', EventSchema) //Definir el modelo de los eventos
 
-module.exports = EventoModel
+module.exports = EventoModel //Exportar el modelo evento

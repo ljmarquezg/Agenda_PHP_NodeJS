@@ -21,23 +21,24 @@ Router.get('/demo', function(req, res) {
 //Validar formulario de inicio de sesion
 Router.post('/login', function(req, res) {
     let user = req.body.user
-    let password = req.body.pass
+    let password = req.body.pass,
+    sess = req.session;
     Usuarios.find({user: user}).count({}, function(err, count) { //Verificar que el usuario está registrado
         if (err) {
             res.status(500)
             res.json(err)
         }else{
-
           if(count == 1){ //Si el usuario existe
             Usuarios.find({user: user, password: password }).count({}, function(err, count) { //Verificar su contraseña
                 if (err) {
-                    res.status(500)
-                    res.json(err)
+                    res.status(500) //Devolver status de error
+                    res.json(err) //Devolver devolver el error en formato json
                 }else{
                   if(count == 1){ //Si ambos campos coinciden con el registro de la base de datos, enviar mensaje Validado
-                    res.send("Validado")
+                    sess.user = req.body.user; //Guardar el nombre del usuario en la variable de manejo de sesiones
+                    res.send("Validado") //Devolver mensaje
                   }else{ //Si la contraseña no coincide, enviar mensaje de error de contraseña
-                    res.send("Contraseña incorrecta")
+                    res.send("Contraseña incorrecta") //Devolver mensaje
                   }
                 }
             })
@@ -49,9 +50,21 @@ Router.post('/login', function(req, res) {
     })
 })
 
-// Obtener un usuario por su id
+
+//Validar formulario de inicio de sesion
+Router.post('/logout', function(req, res) {
+  req.session.destroy(function(err) {
+  if(err) {
+    console.log(err);
+  } else {
+    res.send('logout')
+    res.end()
+  }
+  });
+});
+
 Router.all('*', function(req, res) {
-  res.send('No se encontro el recurso solicitado')
+  res.send('Error al mostrar el recurso solicitado. Por favor verifique la dirección url a la cual desea ingresar' )
   res.end()
 })
 

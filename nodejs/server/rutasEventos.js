@@ -1,98 +1,88 @@
 const RouterEventos = require('express').Router();
-//const Evento = require('./modelEventos.js')
-const Evento = require('./modelEventos.js')
-const Operaciones = require('./crud.js')
+const Evento = require('./modelEventos.js') //Definir el modelo Eventos en una variable
+const Operaciones = require('./crud.js') //Requerir el archivo crud.js
 
-// Obtener un usuario por su id
+// Obtener todos los eventos
 RouterEventos.get('/all', function(req, res) {
-  Evento.find({}).exec(function(err, doc){
-      if (err) {
-          res.status(500)
-          res.json(err)
-      }
-      res.json(doc)
-  })
-})
 
-RouterEventos.get('/reiniciar', function(req, res) {
-  Evento.drop(function(err, resp){
-    res.send(resp)
+  req.session.reload(function(err) { //Recargar la información de la sesión guardada
+    if(typeof(req.session.user) != "undefined") { //Verificar que exista información del usuario en la variable sesión4
+
+      Evento.find({}).exec(function(err, doc){ //Ejecutar sentencia para buvcar todos los registros en la base de datos
+        if (err) {
+          res.status(500)//Devolver error
+          res.json(err) //Devolver error
+        }
+        res.json(doc) //devolver el array de información
+      })
+    }
+    else {
+      res.send('logout'); //Devolver mensaje "logout"
+    }
+
   })
+
 })
 
 RouterEventos.all('/', function(req, res) {
-  res.send('Mostrar main.html')
+  res.send('Error al mostrar el recurso solicitado. Por favor verifique la dirección url a la cual desea ingresar' )
   res.end()
 })
 
-// Agregar a un usuario
+// Crear eventos
 RouterEventos.post('/new', function(req, res) {
-  var newID = Evento.nextCount(function(err, count) {
-    var evento = new Evento();
-    evento.save(function(err) {
-      if(count == 0){
-        count = 1
-      }
+    Evento.nextCount(function(err, count) { //La función nextCount del modulo autoincrement obtiene el valor del último registro guardado en el modelo Evento
+      newID = count //Asignar el valor del identificador a la variable newID
+    });
 
-        evento.nextCount(function(err, count) {
-            newID = (count-1)
-            console.log(newID)
-          });
-      });
-  });
+  let title = req.body.title, //Asignar el valor del título del evento redibido desde el formulario
+  start = req.body.start, //Asignar el valor del inicio del evento redibido desde el formulario
+  end   = req.body.end //Asignar el valor del fin del evento redibido desde el formulario
 
-
-    let title = req.body.title,
-        start = req.body.start,
-        end   = req.body.end
-
-    let evento = new Evento({
-      title: title,
-      start: start,
-      end: end,
-    })
-    evento.save(function(error) {
-        if (error) {
-            res.status(500)
-            res.json(error)
-        }
-        res.json(newID)
-    })
+  let evento = new Evento({ //Crear un nuevo objeto evento con los valores correspondientes
+    title: title,
+    start: start,
+    end: end,
+  })
+  evento.save(function(error) { //Guardar el registro en la base de datos
+    if (error) {
+      res.status(500)
+      res.json(error)
+    }
+    res.json(newID) //Devolver el valor del ultimo id como callback para ser utilizado como parámetro _id en el renderizado del último evento creado
+  })
 })
 
-// Eliminar un usuario por su id
+// Eliminar un evento por su id
 RouterEventos.post('/delete/:_id', function(req, res) {
-    let id = req.params._id
-    Evento.remove({_id: id}, function(error) {
-        if(error) {
-            res.status(500)
-            res.json(error)
+  let id = req.params._id //Obtener el identificador del evento
+  Evento.remove({_id: id}, function(error) { //Ejecutar la función remover evento pasándo como parámetro el id del evento
+    if(error) {
+      res.status(500)
+      res.json(error)
+    }
+    res.send("Registro eliminado") //Enviar mensaje de registro eliminado
+  })
+})
+
+//Actualizar evento
+RouterEventos.get('/update/:_id&:start&:end', function(req, res) { //Obtener el identificador el evento, fecha de inicio y finalización desde el formulario
+  Evento.findOne({_id:req.params._id}).exec((error, result) => { //Encontrar el evento por su identificador
+    let id    = req.params._id, //asignar a la variable id el valor obtenido del formulario
+        start = req.params.start, //asignar a la variable start el valor obtenido del formulario
+        end   = req.params.end //asignar a la variable end el valor obtenido del formulario
+    if (error){ //En caso de error
+      res.send(error) //Enviar error
+    }else{
+      Evento.update({_id: id}, {start:start, end:end}, (error, result) => { //Ejecutar la función actualizar enviando como parámetros de búsqueda el id del evento y como datos a actualizar la fecha inicial y final
+        if (error){ //En caso de error
+          res.send(error )//Enviar error
+        }else{
+          res.send("Evento ha sido actualizado") //Enviar mensaje exitoso
         }
-        res.send("Registro eliminado")
-    })
-})
-
-RouterEventos.get('/update/:_id&:start&:end', function(req, res) {
-    Evento.findOne({_id:req.params._id}).exec((error, result) => {
-    console.log(req.params);
-    let id    = req.params._id,
-        start = req.params.start,
-        end   = req.params.end
-        console.log(req.params)
-          if (error){
-            res.send(error)
-          }else{
-            Evento.update({_id: id}, {start:start, end:end}, (error, result) => {
-                if (error){
-                  res.send(error)
-                }else{
-                  res.send("Evento ha sido actualizado")
-                }
-            })
-          }
       })
-      //res.send('id')//req.params.id +' '+ req.params.start + ' ' + req.params.end)
-      //res.end()
+    }
+  })
 })
 
-module.exports = RouterEventos
+module.exports = RouterEventos //Exportar rutas de los eventos

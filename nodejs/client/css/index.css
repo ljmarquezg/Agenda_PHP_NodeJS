@@ -195,6 +195,7 @@ input {
 
 .logout-container {
   display: flex;
+  cursor: pointer;
 }
 
 .logout-image {
@@ -209,4 +210,14 @@ input {
 
 .addButton:hover {
   background: #009CC0;
+}
+
+#message{
+  height: auto;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  z-index: 100;
+  background: red;
+  color: white;
 }

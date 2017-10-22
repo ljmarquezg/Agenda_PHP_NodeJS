@@ -1,7 +1,8 @@
-/********************************/
-/****    Antes de iniciar   ****/
-/* Leer el archivo readme.html
-/********************************/
+/********************************************************************************/
+/*****************************   Antes de iniciar   *****************************/
+/********** Leer el archivo index.html en la carpeta raiz del proyecto **********/
+/********************************************************************************/
+/********************************************************************************/
 
 const http = require('http'); //requerir el módulo http
       path = require('path'), //requiere el modulo path para trabajar con directorios
@@ -23,7 +24,13 @@ const Server = http.createServer(app) //Crar el servidor a través del módulo h
 app.use(express.static('../client')) //Definir el directorio cliente como directorio raiz
 app.use(bodyParser.json()) //Iniciar el módulo body-parser para interpretar datos en formato JSON.
 app.use(bodyParser.urlencoded({ extended: true}))
-app.use(session({secret: 'nextU'}));
+app.use(session({ //Iniciar modulo de manejo de sesiones
+    secret: 'secret-pass', //Cadena de caracteres secreta para firmar el Identificador de la sesión cookie
+    cookie: { maxAge: 3600000 }, //Mantener las cookies de la sesión iniciada por una hora
+  }));
+
+var sess; //Iniciar la variable sess
+
 app.use('/usuarios', RoutingUsers) //Incluir el módulo usuarios y definir su directorio raíz como /usuarios
 app.use('/events', RoutingEvents) //Incluir el módulo eventos bajo y definir su directorio raíz como /events
 
