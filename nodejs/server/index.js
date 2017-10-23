@@ -11,7 +11,7 @@ const http = require('http'); //requerir el módulo http
       bodyParser = require('body-parser'); //Módulo que permite al servidor interpretar datos en formato JSON.
       MongoClient = require('mongodb').MongoClient, //Reqieror el módulo modngodb
       mongoose = require('mongoose'), //Reqieror el módulo modngoose para crear esquemas y modelos de base de datos.
-      connection = mongoose.connect('mongodb://localhost/agenda_db'); //Definir la ruta y nombre de la base de datos.
+      connection = mongoose.connect('mongodb://localhost/agenda_db', {useMongoClient: true,}); //Definir la ruta y nombre de la base de datos.
 
 const RoutingUsers = require('./rutasUsuarios.js'), //Incluir el archivo de rutas de interacción de usuarios
       RoutingEvents = require('./rutasEventos.js') //Incluir el archivo de rutas de interacción de eventos
@@ -27,9 +27,9 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use(session({ //Iniciar modulo de manejo de sesiones
     secret: 'secret-pass', //Cadena de caracteres secreta para firmar el Identificador de la sesión cookie
     cookie: { maxAge: 3600000 }, //Mantener las cookies de la sesión iniciada por una hora
+    resave: false,
+    saveUninitialized: true,
   }));
-
-var sess; //Iniciar la variable sess
 
 app.use('/usuarios', RoutingUsers) //Incluir el módulo usuarios y definir su directorio raíz como /usuarios
 app.use('/events', RoutingEvents) //Incluir el módulo eventos bajo y definir su directorio raíz como /events

@@ -1,11 +1,13 @@
 let mongoose = require('mongoose'), //Requerir el módulo mongoose
     Schema = mongoose.Schema, //Definir la variable Schema
+    Usuarios = require('./modelUsuarios'),
     autoIncrement = require('mongoose-auto-increment'), //Requerir módulo para autoincrementar valor del Id.
 
     EventSchema = new Schema({ //Cerar el esquema de los Eventos
       title:{ type: String, required: true }, //Definir titulo del evento - Obligatorio
       start: { type: String, required: true }, //Inicio del evento - Obligatorio
       end: { type: String, required: false }, //Finalizacion del evento - No obligatorio
+      user: { type: Schema.ObjectId, ref: "Usuario" }
     });
 
 autoIncrement.initialize(connection) //Inicializar el módulo de autoincrementar en la variable conexión

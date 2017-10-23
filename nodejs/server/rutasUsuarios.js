@@ -1,17 +1,29 @@
 const Router = require('express').Router();
 const Usuarios = require('./modelUsuarios.js')
+const Eventos = require('./modelEventos.js')
 const Operaciones = require('./crud.js')
 //Verificar si existe el usuario DEMO
 Router.get('/demo', function(req, res) {
   Usuarios.find({user: req.query.user}).count({}, function(err, count) { //Verificar si exste el usuario DEMO
     if(count>0){ //Si el registro es mayor a 0
-        res.send("Utilice los siguientes datos: </br>email: demo@mail.com | password:123456")
+        res.send("Utilice los siguientes datos: </br>usuario: demo | password:123456 </br>usuario: juan | password:123456") //Mostrra mensaje con los datos de los usuarios predeterminados
     }else{
+      Eventos.find({}).count({}, function(err, count) { //Si no existen usuarios en la base de datos Verificar que no exista ningún evento creado en la base de datos
+        if(count>0){ //Si existen eventos
+          Eventos.remove({},function(err, doc){ //Vaciar la tabla eventos
+          if(err){
+            console.log(err)
+          }else{
+            console.log("Información de eventos reinicializada") //Mostrar mensaje en cónsola
+          }
+        })
+      }
+    })
       Operaciones.crearUsuarioDemo((error, result) => { //Si no , llamar la función crearUsuarioDemo en el modelo modelUsuarios.js
         if(error){
-          res.send(error)
+          res.send(error) //Enviar mensaje de error
         }else{
-          res.send(result)
+          res.send(result) //Enviar mensaje de resultado
         }
       })
     }
@@ -20,13 +32,13 @@ Router.get('/demo', function(req, res) {
 
 //Validar formulario de inicio de sesion
 Router.post('/login', function(req, res) {
-    let user = req.body.user
-    let password = req.body.pass,
-    sess = req.session;
+    let user = req.body.user //Obtener la informacion del nombre de usuario enviada desde el formulario
+    let password = req.body.pass, //Obtener la informacion de la conrtaseña de usuario enviada desde el formulario
+    sess = req.session; //iniciar el manejador de sesiones.
     Usuarios.find({user: user}).count({}, function(err, count) { //Verificar que el usuario está registrado
         if (err) {
             res.status(500)
-            res.json(err)
+            res.json(err) //Devolver mensaje de error
         }else{
           if(count == 1){ //Si el usuario existe
             Usuarios.find({user: user, password: password }).count({}, function(err, count) { //Verificar su contraseña
@@ -50,14 +62,14 @@ Router.post('/login', function(req, res) {
     })
 })
 
-
 //Validar formulario de inicio de sesion
 Router.post('/logout', function(req, res) {
   req.session.destroy(function(err) {
   if(err) {
-    console.log(err);
+    console.log(err); //Mostrar mensaje de error en cónsola
+    res.json(err) //Devolver mensaje de error
   } else {
-    res.send('logout')
+    res.send('logout') //Devolver logout como respuesta
     res.end()
   }
   });
@@ -68,4 +80,4 @@ Router.all('*', function(req, res) {
   res.end()
 })
 
-module.exports = Router
+module.exports = Router //Exportar el módulo Router

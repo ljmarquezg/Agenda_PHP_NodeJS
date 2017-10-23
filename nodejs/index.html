@@ -21,7 +21,7 @@
   }
   a{
     margin-left: 5px;
-    margin-right: 5px;  
+    margin-right: 5px;
   }
 </style>
 
@@ -52,6 +52,7 @@
                 </p>
               </div>
             </li>
+
             <li>
               <div class="collapsible-header"><i class="material-icons">settings</i>1.2 Instalar mongodb <i class="material-icons">arrow_drop_down</i></div>
               <div class="collapsible-body blue-grey lighten-5">
@@ -66,6 +67,7 @@
                 </span>
               </div>
             </li>
+
             <li>
               <div class="collapsible-header"><i class="material-icons">play_arrow</i>1.3 Iniciar el servicio mongodb <i class="material-icons">arrow_drop_down</i></div>
               <div class="collapsible-body blue-grey lighten-5">
@@ -73,6 +75,36 @@
                   <ol>
                     <li type="i"><p>Ir a la carpeta de instalación mongodb y ejecutar el archivo <i>mongo.exe</i> que se encurntra dentro de la carpeta bin</p></li>
                     <li type="i"><p>Una vez iniciado el servidor, iniciar el servicio cliente ejecuntando el archivo <i>mongod.exe</i> dentro de esta carpeta</p></li>
+                    <ul>
+                      <li>
+                        <a class="waves-effect waves-light modal-trigger" href="#modal">
+                        <div class="collapsible-header"><i class="material-icons">code</i>Crear usuarios por cónsola de comando - (opcional) <i class="material-icons">arrow_drop_down</i></div>
+                        </a>
+                        <!-- Modal Structure -->
+                        <div id="modal" class="modal">
+                          <div class="modal-content">
+                            <h4><i class="material-icons">code</i>Mongod.exe</h4>
+                            <p style="font-size:0.75em;" class="center-align"><b><i>Este paso es opcional ya que el sistema verificará la existencia de los usuarios cada vez que se inicie la conexión. Si no existen, el sistema los generará automáticamente</i></b></p>
+                            <p>En la cónsola mongo.exe ejecutar el códido descrito a continuación para insertar los usuarios en la base de datos.</p>
+                            <ol>
+                              <li>
+                                  <p>Definir agenda_db como la base de datos a utilizar<p>
+                                  <code>use agenda_db</code></p>
+                              </li>
+                              <li>
+                                <p>insertar los usuarios en la base de datos<p>
+                                <p><code>db.usuarios.insertMany([{ email: 'demo@mail.com', user: "demo", password: "123456"}, { email: 'juan@mail.com', user: "juan", password: "123456"}])</code></p>
+                              </li>
+                            </ol>
+                            <a href="dist/img/nodeusers.png" target="_blank"><img src="dist/img/nodeusers.png" style="width:100%"><p>Clic para ampliar</p></a>
+                          </div>
+                          <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                          </div>
+                        </div>
+
+                      </li>
+                    </ul>
                   </ol>
                 </span>
               </div>
@@ -128,15 +160,11 @@
                   <p><i>Examine el archivo index.js ubicado en la carpeta server del proyecto si desea cambiar el puerto o el nombre del servidor.</i></p>
                 </div>
               </li>
-
             </ul>
           </span>
         </div>
       </li>
     </ul>
-
-
-
   </div>
 <script type="text/javascript" src="client/js/jquery.js"></script>
 <script type="text/javascript" src="dist/js/materialize.min.js"></script>

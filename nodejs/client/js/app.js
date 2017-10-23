@@ -8,14 +8,18 @@ class EventManager {
         this.guardarEvento()
     }
 
+    sessionError(){
+      alert('Usuario no ha iniciado sesión') //Enviar mensaje
+      window.location.href = 'http://localhost:3000/index.html' //Redireccionar si no existe sesión iniciada
+    }
+
     obtenerDataInicial() {
         let url = this.urlBase + "/all"
         $.get(url, (response) => {
-          if(response != "logout" ){//Verificar que haa una sesión iniciada y la respuesta del servidor no sea "logout"
-            this.inicializarCalendario(response) //Ejecutar la función para renderizar los eventos en el calendario
+          if(response == "logout" ){//Verificar que la respuesta no sea logout (Usuario no ha iniciado sesion)
+            this.sessionError() ////Mostrar mensaje con el resultado de la consulta
           }else{
-            alert('Usuario no ha iniciado sesión') //Enviar mensaje
-            window.location.href = 'http://localhost:3000/index.html' //Redireccionar si no existe sesión iniciada
+            this.inicializarCalendario(response) //Ejecutar la función para renderizar los eventos en el calendario
           }
         })
     }
@@ -23,7 +27,12 @@ class EventManager {
     eliminarEvento(evento) { //Eliminar evento
         let eventId = evento._id //Obtener el identificador del evento
         $.post('/events/delete/'+eventId, {id: eventId}, (response) => { //Enviar el identificador del evento como parámetro
-            alert(response) Mostrar mensaje
+            if(response == "logout"){ //Verificar que la respuesta no sea logout (Usuario no ha iniciado sesion)
+              this.sessionError() //Llamar la función error de sesiones
+            }else{
+                $('.calendario').fullCalendar('removeEvents', eventId); //Remover el evento del calendario renderizado
+                alert(response) //Mostrar mensaje con el resultado de la consulta
+            }
         })
     }
 
@@ -58,15 +67,20 @@ class EventManager {
                 }
 
                 $.post(url, ev, (response) => {
-                  var newEvent = {
-                      _id:response, //Asignar el valor del nuevo id al nuevo registro
-                      title: title, //Asignar el valor del campo título
-                      start: start, //Asignar el valor del campo start
-                      end: end //Asignar el valor del campo end
-                  }
+                  if(response != "logout"){
+                    var newEvent = {
+                        _id:response, //Asignar el valor del nuevo id al nuevo registro
+                        title: title, //Asignar el valor del campo título
+                        start: start, //Asignar el valor del campo start
+                        end: end //Asignar el valor del campo end
+                    }
 
-                  $('.calendario').fullCalendar('renderEvent', newEvent) //Renderizar los eventos
-                  alert("Evento guardado.") //Enviar mensaje existoso
+                    $('.calendario').fullCalendar('renderEvent', newEvent) //Renderizar los eventos
+                    alert("Evento guardado.") //Enviar mensaje existoso
+                  }
+                  else{
+                    this.sessionError()
+                  }
                 })
 
             } else {
@@ -108,7 +122,7 @@ class EventManager {
                 center: 'title',
                 right: 'month,agendaWeek,basicDay'
             },
-            defaultDate: d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(),
+            defaultDate: d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(), //Mostrar el día actual como fecha predeterminada
             navLinks: true,
             editable: true,
             eventLimit: true,
@@ -132,11 +146,9 @@ class EventManager {
               var y2 = ofs.top + trashEl.outerHeight(true);
               if (jsEvent.pageX >= x1 && jsEvent.pageX<= x2 &&
                   jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
-                    $('.calendario').fullCalendar('removeEvents', event._id);
                     this.eliminarEvento(event, jsEvent)
               }
               $('.delete').find('img').attr('src', "../img/trash.png");
-
             }
             })
         }
@@ -157,14 +169,18 @@ class EventManager {
                   start: start, //obtener la fecha inicial
                   end: end //obtener la fecha final
               }
-              $.get(url, data, (response) => { //Enviar la consulta AJAX
-                  alert(response) //Mostrar mensaje recibido
+              $.post(url, data, (response) => { //Enviar la consulta AJAX
+                  if(response == "logout" ){//Verificar que la respuesta no sea logout (Usuario no ha iniciado sesion)
+                    this.sessionError() //Ejecutar función de error de sesión
+                  }else{
+                    alert(response) //Mostrar mensaje recibido
+                  }
               })
         }
 
         cerrarSesion(){
           var url = "/usuarios/logout", //url a consultar
-              data = "";
+              data = ""; //Enviar variable data sin información
           $.post(url, data, (response) => {
             if(response == "logout"){
               window.location.href="http://localhost:3000/index.html" //url a redireccionar

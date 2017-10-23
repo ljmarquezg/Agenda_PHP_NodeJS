@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información importante</title>
+  <link rel="stylesheet" href="nodejs/client/css/styles.css"/>
+  <link rel="stylesheet" href="nodejs/dist/css/materialize.min.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Neucha" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<style media="screen">
+  body{
+    overflow: auto;
+    background: url('dist/img/bk.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .card-content ol li{
+    margin-bottom:10px
+  }
+  a{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .card-holder{
+    padding:30px; margin-top:12vh; background:#eceff1b3 !important;
+    
+  }
+</style>
+
+  <div class="container">
+    <div class="card-holder" data-collapsible="accordion">
+      <h5 class="center-align">
+        Antes de comenzar:
+      </h5>
+
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="dist/img/php.png">
+              <span class="card-title">Proyecto php</span>
+            </div>
+            <div class="card-content">
+              <p>Antes de iniciar el proyecto Agenda en la versión php, le recomendamos seguir las siguientes instrucciones.</p>
+            </div>
+            <div class="card-action">
+              <a href="php/index.html">Ver instrucciones</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-image">
+              <img src="dist/img/node.png">
+              <span class="card-title">Proyecto NodeJS</span>
+            </div>
+            <div class="card-content">
+              <p>Antes de iniciar el proyecto Agenda en la versión node, le recomendamos seguir las siguientes instrucciones.</p>
+            </div>
+            <div class="card-action">
+              <a href="nodejs/index.html">Ver instrucciones</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+<script type="text/javascript" src="nodejs/client/js/jquery.js"></script>
+<script type="text/javascript" src="nodejs/dist/js/materialize.min.js"></script>
+<script>$('.modal').modal({
+    dismissible: true, // Modal can be dismissed by clicking outside of the modal
+    opacity: .5, // Opacity of modal background
+    inDuration: 300, // Transition in duration
+    outDuration: 200, // Transition out duration
+    startingTop: '4%', // Starting top style attribute
+    endingTop: '10%', // Ending top style attribute
+  }
+);
+</script>
+</div>
+</body>
+</html>
