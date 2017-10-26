@@ -9,9 +9,10 @@ const http = require('http'); //requerir el módulo http
       express = require('express'), //permite el enrutamiento de peticiones.
       session = require('express-session'), // requerir el modulo express-session para manejar las sesiones de los usuarios.
       bodyParser = require('body-parser'); //Módulo que permite al servidor interpretar datos en formato JSON.
-      MongoClient = require('mongodb').MongoClient, //Reqieror el módulo modngodb
+      MongoClient = require('mongodb').MongoClient, //Reqierir el módulo modngodb
       mongoose = require('mongoose'), //Reqieror el módulo modngoose para crear esquemas y modelos de base de datos.
-      connection = mongoose.connect('mongodb://localhost/agenda_db', {useMongoClient: true,}); //Definir la ruta y nombre de la base de datos.
+      //Definir la ruta y nombre de la base de datos utilizando mongodb.
+      connection = mongoose.connect('mongodb://localhost/agenda_db', {useMongoClient: true,}); //definir la base de datos a utilizar
 
 const RoutingUsers = require('./rutasUsuarios.js'), //Incluir el archivo de rutas de interacción de usuarios
       RoutingEvents = require('./rutasEventos.js') //Incluir el archivo de rutas de interacción de eventos

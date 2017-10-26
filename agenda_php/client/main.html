@@ -24,11 +24,13 @@
         </ul>
       </div>
     </div>
-  <div class="loader-container">
-   <div class="loader" style="display:block">
-   </div>
-   <h3>Cargando</h3>
- </div>
+    <div class="overlay">
+      <div class="loader-container">
+         <div class="loader" style="left: calc(50% - 60px)">
+         </div>
+         <h3>Cargando</h3>
+      </div>
+    </div>
 
     <div class="expanded-row main-container">
       <div class="left-cont">
@@ -88,7 +90,7 @@
     <script src="js/vendor/jquery.timepicker.min.js"></script>
     <script src="js/app.js"></script>
     <script type="text/javascript">
-      $('.loader-container').fadeOut('slow')
+      $('.overlay').fadeOut('slow')
     </script>
   </body>
 </html>

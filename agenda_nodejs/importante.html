@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Información importante</title>
+  <title>Agenda verión NodeJS</title>
   <link rel="stylesheet" href="client/css/styles.css"/>
   <link rel="stylesheet" href="dist/css/materialize.min.css"/>
   <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -30,8 +30,8 @@
 
 
     <ul class="collapsible blue-grey lighten-5" data-collapsible="accordion">
-      <h5 class="center-align">
-        Antes de comenzar:
+      <h5 class="center-align" style="margin-top:5%">
+        <img src="../dist/img/node.png" style="max-height:200px">
       </h5>
 
       <li>
@@ -48,7 +48,7 @@
                   <li><a target="_blank"  href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">Windows</a></li>
                 </ul>
                 <p>
-                  Se recomienda realizar la instalación en la ruta por defecto.
+                  <div class="collapsible-header">Se recomienda realizar la instalación en la ruta por defecto.</div>
                 </p>
               </div>
             </li>
@@ -61,7 +61,7 @@
                     <ol>
                       <li type="i"><p>Ejecutar el archivo de instalación descargado en el paso anterior</p></li>
                       <li type="i"><p>Antes de iniciar el programa por primera vez, crear el directorio de bases de datos: <i>data/db</i> en la raiz del disco duro</p></li>
-                      <p>Se recomienda <a target="_blank" href="https://docs.mongodb.com/manual/administration/install-community/">leer la documentación de la instalación </a> </p>
+                      <div class="collapsible-header">Se recomienda <a target="_blank" href="https://docs.mongodb.com/manual/administration/install-community/">leer la documentación de la instalación </a> </div>
                     </ol>
                   </ol>
                 </span>
@@ -73,7 +73,7 @@
               <div class="collapsible-body blue-grey lighten-5">
                 <span>
                   <ol>
-                    <li type="i"><p>Ir a la carpeta de instalación mongodb y ejecutar el archivo <i>mongo.exe</i> que se encurntra dentro de la carpeta bin</p></li>
+                    <li type="i"><p>Ir a la carpeta de instalación mongodb y ejecutar el archivo <i>mongo.exe</i> que se encerntra dentro de la carpeta bin</p></li>
                     <li type="i"><p>Una vez iniciado el servidor, iniciar el servicio cliente ejecuntando el archivo <i>mongod.exe</i> dentro de esta carpeta</p></li>
                     <ul>
                       <li>
@@ -115,7 +115,7 @@
 
       <li>
         <div class="collapsible-header">2. Iniciar NodeJS <i class="material-icons">arrow_drop_down</i></div>
-        <div class="collapsible-body blue-grey lighten-5">
+        <div class="collapsible-body blue-grey lighten-4">
           <span>
             <ul class="collapsible" data-collapsible="accordion">
               <li>
@@ -142,7 +142,7 @@
                                 <ol>
                                   <li type="i"><p>En la consola navegar hasta la carpeta que contiene el proyecto. Para este ejemplo la carpeta se encuentra en <i>C:\nodejs</i></br></p></li>
                                   <li type="i"><p>Navegar hasta la carpeta <i>server</i> contenida dentro de la carpeta raiz del proyecto</br></p></li>
-                                  <li type="i"><p>Ejecutar el comando index.js para iniciar el proyecto</br></p></li>
+                                  <li type="i"><p>Ejecutar el comando <code> node index.js </code> para iniciar el proyecto servicio nodeJS</br></p></li>
                                   <li type="i"><p>Si el sistema se inicia correctamente la cónsola debe mostrar el mensaje <i>"Servidor iniciado en puerto: 3000"</i></br></p></li>
                                 </ol>
                               </div>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda version PHP</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="dist/css/materialize.min.css"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" href="client/css/index.css"  media="screen,projection"/>
+</head>
+
+<body>
+	<div class="container">
+
+		<ul class="collapsible blue-grey lighten-5" data-collapsible="accordion">
+      <h5 class="center-align" style="margin-top:5%">
+        <img src="dist/img/php.png" style="max-height:200px">
+      </h5>
+			<li>
+				<div class="collapsible-header active">
+					<i class="material-icons">system_update_alt</i>1 - Instalar XAMPP <i class="material-icons">arrow_drop_down</i>
+				</div>
+				<div class="collapsible-body blue-grey lighten-4 active">
+					<ul class="collapsible" data-collapsible="accordion" style="display:block">
+						<li>
+							<div class="collapsible-header"><i class="material-icons">cloud_download</i>1.1 - <a href="https://www.apachefriends.org/es/index.html">Descargar</a> la versión más reciente de XAMPP
+							</div>
+						</li>
+						<li>
+							<li>
+								<div class="collapsible-header"><i class="material-icons">desktop_mac</i>1.2 -  Ejecutar el instalador e instalar XAMPP
+								</div>
+							</li>
+						</li>
+					</ul>
+				</div>
+			</li>
+
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons">play_arrow</i>2 - Iniciar Servicios Apache y MySQL <i class="material-icons">arrow_drop_down</i>
+				</div>
+				<div class="collapsible-body blue-grey lighten-4">
+					<ul class="collapsible" data-collapsible="accordion">
+						<li>
+							<div class="collapsible-header"><p></p>
+								<i class="material-icons">dashboard</i>2.1 - Abrir XAMPP control panel
+							</div>
+						</li>
+
+						<li>
+							<div class="collapsible-header">
+								<i class="material-icons">play_arrow</i>2.2 - Iniciar servicio Apache <i class="material-icons">arrow_drop_down</i>
+							</div>
+							<div class="collapsible-body blue-grey lighten-5 center-align">
+								<a href="dist/img/mysql.png" target="_blank"><img src="dist/img/apache.png" style="max-height:200px"></br>Click para ampliar</a>
+							</div>
+						</li>
+
+						<li>
+							<div class="collapsible-header"><p></p>
+								<i class="material-icons">play_arrow</i>2.3 - Iniciar servicio MySQL <i class="material-icons">arrow_drop_down</i>
+							</div>
+							<div class="collapsible-body blue-grey lighten-5 center-align">
+								<a href="dist/img/mysql.png" target="_blank"><img src="dist/img/mysql.png" style="max-height:200px"></br>Click para ampliar</a>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</li>
+
+			<li>
+				<div class="collapsible-header">
+					<i class="material-icons">laptop_mac</i>3 - Abrir el proyecto en el explorador <i class="material-icons">arrow_drop_down</i>
+				</div>
+				<div class="collapsible-body blue-grey lighten-4 active">
+						<div class="row">
+							<div class="col s12 m12">
+								<ul class="collapsible" data-collapsible="accordion">
+									<li>
+										<div class="collapsible-header">
+											<i class="material-icons">content_copy</i>3.1 - Copiar archivos del proyecto en la carpeta htdocs de xampp.<i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div class="collapsible-body blue-grey lighten-5">
+											Copiar la carpeta  <b><code class="orange-text">agenda_php</code></b> dentro del directorio xampp/htdocs. La ruta por defecto:</br>
+											<code>C:\xampp\htdocs\</code>
+										</div>
+									</li>
+									<li>
+										<div class="collapsible-header">
+											<i class="material-icons">mode_edit</i>3.2 - Editar la conficuración del archivo <b></b>.<i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div class="collapsible-body blue-grey lighten-5">
+											<p>Verificar los parámetros <code class="orange-text"><b><i>localhost, username, password </i></b></code> del archivo <code>conector.php</code> contenido en la carpeta <code>agenda_php/server</code></p>
+											<p>La ruta por defecto: <code>C:\xampp\htdocs\agenda_php\server\conector.php</code></p>
+											<i style="font-size: 0.75em"><b>Si se configura el archivo <b></b> con a información de un usuario con permisos administrativos de phpmyadmin, se puede omitir el paso siguiente ya que el sistema generará automáticamente la base de datos e insertará la información del usuario</b></i>
+										</div>
+									</li>
+									<li>
+										<div class="collapsible-header">
+											<i class="material-icons">import_export</i>3.3 Importar la base de datos en phpmyadmin <i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div class="collapsible-body blue-grey lighten-5">
+											<ol>
+											<li type="i"> Abrir en el explorador phpmyadmin. <code class="orange-text"><b>localhost:PUERTO/phpmyadmin</b></code></li>
+											<li type="i"> Crear la base de datos por defecto <code class="orange-text"><b>agenda_db</b></code></li>
+											<li type="i"> Importar la información de la base de datos utilizando el archivo <code class="orange-text"><b>agenda_db.slq</b></code></li>
+										</ol>
+										</div>
+									</li>
+									<li>
+										<div class="collapsible-header">
+											<i class="material-icons">code</i>3.4 Abrir el proyecto <i class="material-icons">arrow_drop_down</i>
+										</div>
+										<div class="collapsible-body blue-grey lighten-5">
+											<p>i. Abrir el explorador</p>
+											<p>ii. ir a la dirección url del proyecto utilizando el formato: <code class="orange-text"><b>localhost:PUERTO/nombre_carpeta/server</b></code></br>ejemplo: <b>localhost:8080/agenda_php/server</b></p>
+
+										</div>
+									</li>
+								</ul>
+							</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="dist/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="dist/js/materialize.min.js"></script>
+	<script>$('.collapsible').collapsible({accordion: false })</script>
+</body>
+</html>

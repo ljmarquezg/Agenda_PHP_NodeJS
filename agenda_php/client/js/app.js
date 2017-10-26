@@ -5,8 +5,8 @@ class EventsManager {
     constructor() {
         this.obtenerDataInicial()
     }
-    obtenerDataInicial() {
-        let url = '../server/getEvents.php'
+    obtenerDataInicial() { //Función para obtener los eventos correspondientes al usuario actual
+        let url = '../server/getEvents.php' //url a consultar via ajax
         $.ajax({
           url: url,
           dataType: "json",
@@ -35,7 +35,7 @@ class EventsManager {
     }
 
     poblarCalendario(eventos) {
-      var d = new Date();
+      var d = new Date(); //Definir la fecha actual
         $('.calendario').fullCalendar({
             header: {
         		left: 'prev,next today',
@@ -113,7 +113,7 @@ class EventsManager {
                   end: $('#end_date').val()+"T"+$('#end_hour').val()
                 })
               }
-              alert('Se ha añadido el evento exitosamente '+ data.id)
+              alert('Se ha añadido el evento exitosamente ')
             }else {
               alert(data.msg)
             }

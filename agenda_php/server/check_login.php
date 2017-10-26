@@ -5,6 +5,7 @@
   $response['conexion'] = $con->initConexion($con->database); //Obtener el estado de la coenxión
 
   if(isset($_SESSION['email'])){ //Verificar que no haya ninguna sesión iniciada
+    $response['msg'] = 'Redireccionando'; //Enviar mensaje de redirección
     $response['acceso'] = "Usuario Autorizado"; //Devolver el estado de sesión iniciada
   }else{
   if ($response['conexion']=='OK') { //Si no existe sesión iniciada

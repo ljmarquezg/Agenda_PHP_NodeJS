@@ -1,7 +1,6 @@
 var Usuario = require('./modelUsuarios.js'), //Asignarle a la variable USUARIO el modelo del usuario
-    Eventos = require('./modelEventos.js') //Asignarle a la variable USUARIO el modelo del usuario
 
-module.exports.crearUsuarioDemo = function(callback){ //Función para crear usuarios
+crearUsuarioDemo = function(callback){ //Función para crear usuarios
   var arr = [{ email: 'demo@mail.com', user: "demo", password: "123456"}, { email: 'juan@mail.com', user: "juan", password: "123456"}]; //array con la información de los usuarios a insertar
   Usuario.insertMany(arr, function(error, docs) { //Utilizar la función insertMany para insertar varios registros en una sola consulta
     if (error){ //Acciones si existe un error

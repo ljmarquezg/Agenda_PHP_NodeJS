@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2017 at 09:59 PM
+-- Generation Time: Oct 26, 2017 at 03:40 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -31,9 +31,9 @@ CREATE TABLE `eventos` (
   `titulo` varchar(50) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `hora_inicio` varchar(20) DEFAULT NULL,
-  `fecha_finalizacion` varchar(20) DEFAULT '',
+  `fecha_finalizacion` varchar(20) DEFAULT NULL,
   `hora_finalizacion` varchar(20) DEFAULT NULL,
-  `allday` tinyint(1) NOT NULL DEFAULT '0',
+  `allday` tinyint(1) NOT NULL,
   `fk_usuarios` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -42,11 +42,16 @@ CREATE TABLE `eventos` (
 --
 
 INSERT INTO `eventos` (`id`, `titulo`, `fecha_inicio`, `hora_inicio`, `fecha_finalizacion`, `hora_finalizacion`, `allday`, `fk_usuarios`) VALUES
-(24, 'Primer Evento', '2017-10-01', '07:00:00', '2017-10-03', '07:00:00', 0, 'juan@mail.com'),
-(25, 'Segundo Evento Juan', '2017-10-03', '07:00:00', '2017-10-03', '07:00:00', 0, 'juan@mail.com'),
-(26, 'Sexto Evento', '2017-10-07', '07:00:00', '2017-10-01', '07:00:00', 0, 'demo@mail.com'),
-(27, 'Evento demo1', '2017-10-01', '07:00:00', '2017-10-02', '05:30:00', 0, 'demo@mail.com'),
-(28, 'Eventos Demo2', '2017-10-10', '', '', '', 1, 'demo@mail.com');
+(12, 'Primer Evento Demo', '2017-10-01', '06:00:00', '2017-10-01', '07:00:00', 0, 'demo@mail.com'),
+(13, 'Segundo Evento Demo', '2017-10-03', '08:30:00', '2017-10-03', '10:30:00', 0, 'demo@mail.com'),
+(14, 'Tercer Evento Demo - Dia entero', '2017-10-05', '', '', '', 1, 'demo@mail.com'),
+(15, 'Primer Evento Juan - Dia entero', '2017-10-02', ':00', '', ':00', 1, 'juan@mail.com'),
+(16, 'Segundo Evento Juan', '2017-10-02', '12:30:00', '2017-10-05', '17:30:00', 0, 'juan@mail.com'),
+(17, 'Tercer Evento Juan', '2017-10-11', '12:30:00', '2017-10-12', '17:30:00', 0, 'juan@mail.com'),
+(18, 'Primer Evento Carla', '2017-10-05', '05:00:00', '2017-10-07', '15:00:00', 0, 'carla@mail.com'),
+(19, 'Segundo Evento Carla', '2017-10-11', '16:00:00', '2017-10-11', '17:00:00', 0, 'carla@mail.com'),
+(20, 'Tercer Evento Carla - Dia entero', '2017-10-15', ':00', '', ':00', 1, 'carla@mail.com'),
+(22, 'Cuarto Evento Carla - Dia entero', '2017-10-16', '', '', '', 1, 'carla@mail.com');
 
 -- --------------------------------------------------------
 
@@ -66,9 +71,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`email`, `nombre`, `password`, `fecha_nacimiento`) VALUES
-('carla@mail.com', 'Carla Rodriguez', '$2y$10$zzxiK9rvUoSB5E2kShtPA.QgyHpQU/0A3Skh8KW.CJ6Y/4nJwht2y', '1990-04-15'),
-('demo@mail.com', 'Usuario Demo', '$2y$10$Ds6QQ6PjRSoQNcmsTfsqsOzLL.uDR09v98A.H/vTInu5zx0/QdAKi', '1998-09-08'),
-('juan@mail.com', 'Juan GÃ³mez', '$2y$10$OgyI6lQ4jhEjQZ87XZhuCOsLzuIn9uFcDNVkCZ.G7vvq6SGtD9W9u', '1997-12-21');
+('carla@mail.com', 'Carla Rodriguez', '$2y$10$jKtuUYl6SCCnPt1D1XVPvepTnxWQBRY6S58NGB3AhTt4F0SVZhaum', '1990-04-15'),
+('demo@mail.com', 'Usuario Demo', '$2y$10$/0sQ3gkcfaIShTsthJeQPuWIGDyssIZz88be0IyLp5moRNnfOj6dq', '1998-09-08'),
+('juan@mail.com', 'Juan GÃ³mez', '$2y$10$rUNipkbIkuD9i0SS1beoauf3vI.H64ifn/8wWDAHWKlqn1kdBrpLS', '1997-12-21');
 
 --
 -- Indexes for dumped tables
@@ -95,7 +100,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- Constraints for dumped tables
 --
@@ -104,7 +109,7 @@ ALTER TABLE `eventos`
 -- Constraints for table `eventos`
 --
 ALTER TABLE `eventos`
-  ADD CONSTRAINT `fk_eventos_usuario` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`email`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_usuarioemail_evento` FOREIGN KEY (`fk_usuarios`) REFERENCES `usuarios` (`email`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
