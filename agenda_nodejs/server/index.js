@@ -12,7 +12,14 @@ const http = require('http'); //requerir el módulo http
       MongoClient = require('mongodb').MongoClient, //Reqierir el módulo modngodb
       mongoose = require('mongoose'), //Reqieror el módulo modngoose para crear esquemas y modelos de base de datos.
       //Definir la ruta y nombre de la base de datos utilizando mongodb.
-      connection = mongoose.connect('mongodb://localhost/agenda_db', {useMongoClient: true,}); //definir la base de datos a utilizar
+	     connection = mongoose.connect('mongodb://localhost/agenda_db', {useMongoClient: true}, function(error){//definir y establecer la base de datos a utilizar
+           if(error){ //Verificar si existe error al conectarse a mongodb
+           	 console.log(error.name +" "+ error.message); //Mostrar mensaje de eror
+           }else{
+              console.log('Conectado a MongoDB'); //Mostrar mensaje exitoso
+           }
+        });
+
 
 const RoutingUsers = require('./rutasUsuarios.js'), //Incluir el archivo de rutas de interacción de usuarios
       RoutingEvents = require('./rutasEventos.js') //Incluir el archivo de rutas de interacción de eventos
