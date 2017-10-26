@@ -41,17 +41,17 @@ CREATE TABLE `eventos` (
 -- Dumping data for table `eventos`
 --
 
-INSERT INTO `eventos` (`id`, `titulo`, `fecha_inicio`, `hora_inicio`, `fecha_finalizacion`, `hora_finalizacion`, `allday`, `fk_usuarios`) VALUES
-(12, 'Primer Evento Demo', '2017-10-01', '06:00:00', '2017-10-01', '07:00:00', 0, 'demo@mail.com'),
-(13, 'Segundo Evento Demo', '2017-10-03', '08:30:00', '2017-10-03', '10:30:00', 0, 'demo@mail.com'),
-(14, 'Tercer Evento Demo - Dia entero', '2017-10-05', '', '', '', 1, 'demo@mail.com'),
-(15, 'Primer Evento Juan - Dia entero', '2017-10-02', ':00', '', ':00', 1, 'juan@mail.com'),
-(16, 'Segundo Evento Juan', '2017-10-02', '12:30:00', '2017-10-05', '17:30:00', 0, 'juan@mail.com'),
-(17, 'Tercer Evento Juan', '2017-10-11', '12:30:00', '2017-10-12', '17:30:00', 0, 'juan@mail.com'),
-(18, 'Primer Evento Carla', '2017-10-05', '05:00:00', '2017-10-07', '15:00:00', 0, 'carla@mail.com'),
-(19, 'Segundo Evento Carla', '2017-10-11', '16:00:00', '2017-10-11', '17:00:00', 0, 'carla@mail.com'),
-(20, 'Tercer Evento Carla - Dia entero', '2017-10-15', ':00', '', ':00', 1, 'carla@mail.com'),
-(22, 'Cuarto Evento Carla - Dia entero', '2017-10-16', '', '', '', 1, 'carla@mail.com');
+INSERT INTO `eventos` (`id`,`titulo`, `fecha_inicio`, `hora_inicio`, `fecha_finalizacion`, `hora_finalizacion`, `allday`, `fk_usuarios`) VALUES
+(1,'Primer Evento Demo', '2017-10-01', '06:00:00', '2017-10-01', '07:00:00', 0, 'demo@mail.com'),
+(2,'Segundo Evento Demo', '2017-10-03', '08:30:00', '2017-10-03', '10:30:00', 0, 'demo@mail.com'),
+(3,'Tercer Evento Demo - Dia entero', '2017-10-05', '', '', '', 1, 'demo@mail.com'),
+(4,'Primer Evento Juan - Dia entero', '2017-10-02', ':00', '', ':00', 1, 'juan@mail.com'),
+(5,'Segundo Evento Juan', '2017-10-02', '12:30:00', '2017-10-05', '17:30:00', 0, 'juan@mail.com'),
+(6,'Tercer Evento Juan', '2017-10-11', '12:30:00', '2017-10-12', '17:30:00', 0, 'juan@mail.com'),
+(7,'Primer Evento Carla', '2017-10-05', '05:00:00', '2017-10-07', '15:00:00', 0, 'carla@mail.com'),
+(8,'Segundo Evento Carla', '2017-10-11', '16:00:00', '2017-10-11', '17:00:00', 0, 'carla@mail.com'),
+(9,'Tercer Evento Carla - Dia entero', '2017-10-15', ':00', '', ':00', 1, 'carla@mail.com'),
+(10,'Cuarto Evento Carla - Dia entero', '2017-10-16', '', '', '', 1, 'carla@mail.com');
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --

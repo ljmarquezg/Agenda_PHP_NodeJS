@@ -16,11 +16,11 @@ if($response['conexion'] == 'OK'){
     $data['fk_usuarios'] = '"'.$_SESSION['email'].'"';
 
     /*Enviar los parámetros de inserción de información a la tabla eventos*/
-    if($con->insertData('eventos', $data)){
+    if($con->insertData('eventos', $data)){ //Insertar la información en la base de datos
         /*Mostrar mensaje success*/
         $resultado = $con->consultar(['eventos'],['MAX(id)']); //Obtener el id registrado perteneciente al nuevo registro
         while($fila = $resultado->fetch_assoc()){
-          $response['id']=$fila['MAX(id)']; //Enviar ultimo Id como parámetro para el calendario
+          $response['id']=$fila['MAX(id)']; //Enviar ultimo Id guardado como parámetro para el calendario
         }
         $response['msg'] = 'OK';
     }else{

@@ -12,14 +12,11 @@ if($response['conexion'] == 'OK'){
 	    $data['hora_finalizacion'] = '"'.$_POST['end_hour'].'"';
 
 			if($data['id'] != 'undefined'){
-				$resultado = $con->actualizarRegistro('eventos', $data, 'id ='.$data['id']);
+				$resultado = $con->actualizarRegistro('eventos', $data, 'id ='.$data['id']); //Actualizar el registro que coincida con el id del evento a actualizar
 				$response['msg'] = 'OK';
 			}else{
 				$response['msg'] = "Ha ocurrido un error al actualizar el evento";
 			}
-
-
-
 }else{
     /*Mostrar mensaje de error*/
     $response['msg'] = "Error en la comunicacion con la base de datos";

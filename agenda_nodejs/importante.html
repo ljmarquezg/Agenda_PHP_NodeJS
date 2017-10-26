@@ -125,25 +125,16 @@
                       <div class="col s12 m7">
                           <div class="card horizontal">
                             <div class="card-image">
-                              <a class="waves-effect waves-light modal-trigger" href="#modal1"><img src="dist/img/nodeindex.png"></a>
+                              <a class="waves-effect waves-light modal-trigger" href="dist/img/nodeindex.png" target="_blank"><img src="dist/img/nodeindex.png"><p>Click para ampliar</p></a>
                               <!-- Modal Structure -->
-                              <div id="modal1" class="modal">
-                                <div class="modal-content">
-                                  <img src="dist/img/nodeindex.png">
-                                </div>
-                                <div class="modal-footer">
-                                  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
-                                </div>
-                              </div>
-
                             </div>
                             <div class="card-stacked">
                               <div class="card-content">
                                 <ol>
-                                  <li type="i"><p>En la consola navegar hasta la carpeta que contiene el proyecto. Para este ejemplo la carpeta se encuentra en <i>C:\nodejs</i></br></p></li>
-                                  <li type="i"><p>Navegar hasta la carpeta <i>server</i> contenida dentro de la carpeta raiz del proyecto</br></p></li>
+                                  <li type="i"><p>En la consola navegar hasta la carpeta server dentro de la carpeta raiz que contiene el proyecto. Para este ejemplo la carpeta del proyecto se encuentra en la raiz del disco duro <i>C:\agenda_nodejs\  </i></br></p></li>
+                                  <li type="i"><p>Utilizando la cónsola, navegar hasta la carpeta <i>server</i> contenida dentro de la carpeta raiz del proyecto utilizando el siguiente comando:</br><code>cd C:\agenda_nodejs\server</code></p></li>
                                   <li type="i"><p>Ejecutar el comando <code> node index.js </code> para iniciar el proyecto servicio nodeJS</br></p></li>
-                                  <li type="i"><p>Si el sistema se inicia correctamente la cónsola debe mostrar el mensaje <i>"Servidor iniciado en puerto: 3000"</i></br></p></li>
+                                  <li type="i"><p>Si el sistema se inicia correctamente la cónsola debe mostrar el mensaje <i>"Server is listening on port: 3000"</i></br></p></li>
                                 </ol>
                               </div>
                             </div>
@@ -158,12 +149,18 @@
                 <div class="collapsible-body blue-grey lighten-5">
                   <p>Si la configuración se ha realizado correctamente, el navedador abrirá una nueva pestaña con la página principal del proyecto al hacer clic en <a target="_blank" href="http://localhost:3000">Abrir Proyecto</a>.</p>
                   <p><i>Examine el archivo index.js ubicado en la carpeta server del proyecto si desea cambiar el puerto o el nombre del servidor.</i></p>
+
+                  <p class="red-text">IMPORTANTE</p>
+                  <p>Si el servicio node se encuentra iniciado y por error elimina la base de datos, reinicie el servicio <code>node index.js</code> ya que el sistema debe inicializar la tabla <b>identitycounters</b> en la cual se guardan los valores autoincrementales relacionados con los eventos creados.</p>
                 </div>
               </li>
             </ul>
           </span>
         </div>
       </li>
+      <p class="center-align">
+        Luis José Márquez González
+      </p>
     </ul>
   </div>
 <script type="text/javascript" src="client/js/jquery.js"></script>

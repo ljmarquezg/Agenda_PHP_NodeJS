@@ -12,12 +12,11 @@
     if($con->verifyUsers() > 0){ //Verificar que la base de datos tenga usuarios registrados con la función verifyUsers
 
     //Verificar que el email del usuario está registrado
-    $resultado_consulta = $con->consultar(['usuarios'],
-    ['email', 'password'], 'WHERE email="'.$_POST['username'].'"');
+    $resultado_consulta = $con->consultar(['usuarios'], ['email', 'password'], 'WHERE email="'.$_POST['username'].'"');
 
     if ($resultado_consulta->num_rows != 0) { //Si el resultado es mayor que 0 el email se encuentra registrado
       $fila = $resultado_consulta->fetch_assoc(); //recorrer los resultados
-      if (password_verify($_POST['password'], $fila['password'])) { //Verificar que la contraseña ingresada corresponda con el usuario
+      if (password_verify($_POST['password'], $fila['password'])) { //Verificar que la contraseña ingresada corresponda con el usuario de manera encriptada
         $response['msg'] = 'Redireccionando'; //Enviar mensaje de redirección
         $response['acceso'] = 'Usuario Autorizado'; //Validar el acceso del usuario
         $_SESSION['email']=$fila['email']; //Asiganar la sesion al usuario actual
@@ -26,7 +25,7 @@
         $response['acceso'] = 'Acceso rechazado'; //Estado del acceso
       }
     }else{
-      $response['msg'] = 'Email incorrecto'; //mensaje Si el email no existe
+      $response['msg'] = 'Email incorrecto'; //Mensaje si el email no existe
       $response['acceso'] = 'Acceso rechazado'; //Estado del acceso
     }
   }else{

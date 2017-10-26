@@ -69,6 +69,7 @@ Router.post('/logout', function(req, res) {
     console.log(err); //Mostrar mensaje de error en cónsola
     res.json(err) //Devolver mensaje de error
   } else {
+    req.session = null //Elimina las cookies de la session
     res.send('logout') //Devolver logout como respuesta
     res.end()
   }

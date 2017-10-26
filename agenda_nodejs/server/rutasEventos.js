@@ -7,20 +7,29 @@ let ObjectId = require('mongoose').Types.ObjectId;
 // Obtener todos los eventos del usuario logueado
 RouterEventos.get('/all', function(req, res) {
   req.session.reload(function(err) { //Recargar la información de la sesión guardada
-    if(err){
-      res.send('logout'); //Devolver mensaje "logout"
-    }else{
-      Usuario.findOne({user:req.session.user}).exec({}, function(error, doc){
-        Evento.find({user: doc._id}).exec(function(err, doc){ //Ejecutar sentencia para buvcar todos los registros en la base de datos correspondientes al usuario logueado
-          if (err) {
-            res.status(500)//Devolver error
-            res.json(err) //Devolver error
+    if(req.session.user){ //Verificar que haya un usuario con sesión iniciada
+      if(err){
+        res.send('logout'); //Devolver mensaje "logout"
+        res.end()
+      }else{
+        Usuario.findOne({user:req.session.user}).exec({}, function(error, doc){
+          if(error){
+            res.send('logout'); //Devolver mensaje "logout"
+          }else{
+            Evento.find({user: doc._id}).exec(function(err, doc){ //Ejecutar sentencia para buvcar todos los registros en la base de datos correspondientes al usuario logueado
+              if (err) {
+                res.status(500)//Devolver error
+                res.json(err) //Devolver error
+              }
+              res.json(doc) //devolver el array de información
+            })
           }
-          res.json(doc) //devolver el array de información
         })
-      })
+      }
+    }else{ //Si no existe sesión iniciada
+      res.send('logout'); //Devolver mensaje "logout"
+      res.end()
     }
-
   })
 })
 
